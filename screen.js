@@ -15,11 +15,13 @@ let state = {
 
 
 // running process
+let runner
+
 
 function startMessage (message) {
   
   var exec = require('child_process').exec;
-  let runner = exec(state.bigString + message, function(error, stdout, stderr) {
+  runner = exec(state.bigString + message, function(error, stdout, stderr) {
       console.log('stdout: ' + stdout)
       // console.log('stderr: ' + stderr);
       if (error !== null) {
