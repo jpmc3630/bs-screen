@@ -52,7 +52,7 @@ function startMessage (message) {
 
 
 //   setTimeout(() => {
-  killProcess('text-scroller');    
+  // killProcess('text-scroller');    
   
   var exec = require('child_process').exec;
   exec(state.bigString + message, function(error, stdout, stderr) {
