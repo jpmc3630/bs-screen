@@ -16,11 +16,10 @@ let state = {
 
 // running process
 const { spawn } = require('child_process');
-var sh = spawn('bash');
+var sh = spawn('pwd');
 
 sh.stdout.on('data', function(data) {
   console.log('stdout' + data);
-  
 });
 
 function startMessage (message) {
