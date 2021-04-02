@@ -41,9 +41,9 @@ function startMessage (message) {
     '--led-brightness=100', 
     '--led-pixel-mapper=Flipper', 
     '-s.3', 
-    '-C0,20,255', 
+    '-C120,20,50', 
     '-t-2', 
-    message
+    'AAAAAAAAAA'
   ];
 
   //  = spawn('seq', '', {detached: true});
