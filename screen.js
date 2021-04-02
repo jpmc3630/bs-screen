@@ -11,7 +11,9 @@ let state = {
   // currentRoom: '',
   // roomStatus: ''
   // bigString: `sudo ../text-scroller -f ../../fonts/nethack16.bdf --led-chain=8  --led-rows=16 --led-cols=8 --led-multiplexing=18 --led-parallel=2 --led-slowdown-gpio=5 --led-brightness=100 --led-multiplexing=18 --led-pixel-mapper=Flipper -s.5 -C0,20,255 -t-2 lalalaalalalalalalalalalala `
-  bigString: `sudo ../text-scroller -f ../../fonts/nethack16.bdf --led-chain=8  --led-rows=16 --led-cols=8 --led-multiplexing=18 --led-parallel=2 --led-slowdown-gpio=5 --led-brightness=100 --led-multiplexing=18 --led-pixel-mapper=Flipper -t-2 -s.5`
+  // bigString: `sudo ../text-scroller -f ../../fonts/nethack16.bdf --led-chain=8  --led-rows=16 --led-cols=8 --led-multiplexing=18 --led-parallel=2 --led-slowdown-gpio=5 --led-brightness=100 --led-multiplexing=18 --led-pixel-mapper=Flipper -t-2 -s.5`
+  running_pid: null
+
 }
 
 
@@ -28,16 +30,12 @@ var child_process = require('child_process');
 
 function startScreen(message, color, colorOutline) {
   
-  // 
-  var exec = require('child_process').exec;
-  let runnerKill = exec('pkill -9 text-scroller', function(error, stdout, stderr) {
-     console.log('stdout: ' + stdout)
-     // console.log('stderr: ' + stderr);
-     if (error !== null) {
-         console.log('exec error: ' + error)
-     }
- })
+  if (running_pid != null) {
+    kill(running_pid)
+    state.running_pid = null
+  }
 
+  // pkill -9 text-scroller
 
   var cmdArgs = [
     '../text-scroller',
@@ -70,7 +68,7 @@ function startScreen(message, color, colorOutline) {
          console.log('exec error: ' + error)
      }
  })
-//  runner_pid = runner.pid
+ state.running_pid = runner.pid
 
 
 //    let runner = exec(state.bigString, function(error, stdout, stderr) {
@@ -98,12 +96,6 @@ function startScreen(message, color, colorOutline) {
 
 // 
 
-function stopMessage(runner) {
-  
-
-
-}
-
 
 socket.on('connect', function(socketId) {
   
@@ -123,9 +115,6 @@ socket.on('connect', function(socketId) {
 
  })
 
-//  socket.on('stopMessage', (data) => {
-//   console.log('stop the message')
-//    stopMessage()
-//  })
+
 
 })
