@@ -153,8 +153,9 @@ socket.on('connect', function(socketId) {
 // console.log(data.json())
   // startMessage(data.message)
 
-  var x =JSON.parse(JSON.stringify(data));
-console.log(x.message);
+  data.json()
+  .then(x => console.log(x.message))
+
  })
 
 //  socket.on('stopMessage', (data) => {
