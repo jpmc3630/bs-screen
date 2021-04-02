@@ -15,24 +15,18 @@ let state = {
 
 
 // running process
+const { spawn } = require('child_process');
+var sh = spawn('bash');
 
-var runner_pid
-
-
+sh.stdout.on('data', function(data) {
+  console.log('stdout' + data);
+  
+});
 
 function startMessage (message) {
   
+  sh.stdin.write(state.bigString);
 
-
-var exec = require('child_process').exec;
-   let runner = exec(state.bigString, function(error, stdout, stderr) {
-      console.log('stdout: ' + stdout)
-      // console.log('stderr: ' + stderr);
-      if (error !== null) {
-          console.log('exec error: ' + error)
-      }
-  })
-  runner_pid = runner.pid
 }
 
 
@@ -40,31 +34,7 @@ var exec = require('child_process').exec;
 
 function stopMessage() {
   
-  // // killing process
-  var kill = function (pid, signal, callback) {
-      signal   = signal || 'SIGKILL';
-      callback = callback || function () {}
-      var killTree = true;
-      if(killTree) {
-          psTree(pid, function (err, children) {
-              [pid].concat(
-                  children.map(function (p) {
-                      return p.PID;
-                  })
-              ).forEach(function (tpid) {
-                  try { process.kill(tpid, signal) }
-                  catch (ex) { }
-              });
-              callback();
-          });
-      } else {
-          try { process.kill(pid, signal) }
-          catch (ex) { }
-          callback()
-      }
-  };
-  console.log(runner_pid)
-  kill(runner_pid);
+  sh.stdin.write('\x03');
 
 }
 
