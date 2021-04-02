@@ -1,5 +1,5 @@
 // required for the kill process
-var psTree = require('ps-tree');
+// var psTree = require('ps-tree');
 var io = require('socket.io-client');
 
 const socket = io("wss://bs-pager.herokuapp.com")
@@ -16,13 +16,28 @@ let state = {
 
 var kill = require('tree-kill');
 // var child_process = require('child_process');
-const spawn = require('child_process').spawn;
+const { spawn } = require('child_process');
 
 function startMessage (message) {
   
 
-  var scriptArgs = ['-f../../fonts/nethack16.bdf', '--led-chain=8', '--led-rows=16', '--led-multiplexing=18', '--led-parallel=2', '--led-slowdown-gpio=5', '--led-brightness=100', '--led-multiplexing=18', '--led-pixel-mapper=Flipper', '-s.5', '-C0,20,255', '-t-2', 'THE STRING WE SPEAK'];
+  var scriptArgs = [
+    '-f../../fonts/nethack16.bdf', 
+    '--led-chain=8', 
+    '--led-rows=16', 
+    '--led-cols=8', 
+    '--led-multiplexing=18', 
+    '--led-parallel=2', 
+    '--led-slowdown-gpio=5', 
+    '--led-brightness=100', 
+    '--led-pixel-mapper=Flipper', 
+    '-s.3', 
+    '-C0,20,255', 
+    '-t-2', 
+    'THE STRING WE SPEAK'
+  ];
   var child = spawn('../text-scroller', scriptArgs);
+
 
 
 
