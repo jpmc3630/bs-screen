@@ -143,14 +143,14 @@ socket.on('connect', function(socketId) {
   
   // console.log(JSON.stringify(data))
 
-  // console.log(data.message)
-  // console.log(color)
+  console.log('message: ' + message)
+  console.log('color: ' + color)
 
   // console.log(JSON.stringify(data))
   // console.log(data.message)
   // stopMessage()
 
-  startMessage(message, color)
+  // startMessage(message, color)
  })
 
 //  socket.on('stopMessage', (data) => {
