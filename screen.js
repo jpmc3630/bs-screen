@@ -40,7 +40,7 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
     
   });
 
-  if (state.running_pids.length > 0) {
+  if (state.running_pids.length > 1) {
     state.running_pids.pop()
   }
 
