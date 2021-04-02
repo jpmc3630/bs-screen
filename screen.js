@@ -25,7 +25,7 @@ var runner_pid
 // var kill = require('tree-kill');
 
 var spawn = require('child_process').spawn;
-
+var execF = require('child_process').execF;
 //  child
 
 function startMessage (message) {
@@ -36,7 +36,7 @@ function startMessage (message) {
   //  = spawn('seq', '', {detached: true});
   var child=spawn('seq', ['10000000000']);
 
-// var exec = require('child_process').exec;
+
 //    let runner = exec(state.bigString, function(error, stdout, stderr) {
 //       console.log('stdout: ' + stdout)
 //       // console.log('stderr: ' + stderr);
@@ -47,7 +47,7 @@ function startMessage (message) {
   // runner_pid = runner.pid
 
   setTimeout(function() {
-    child_process.execF('closeme.sh', [child.pid], function(){
+    execF('closeme.sh', [child.pid], function(){
       console.log('killed');
   });
   }, 7000);
