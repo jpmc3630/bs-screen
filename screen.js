@@ -40,7 +40,7 @@ function startMessage (message) {
   var child = spawn('./text-scroller', scriptArgs);
 
 
-
+// new comment
 
   
 //   var exec = require('child_process').exec;
