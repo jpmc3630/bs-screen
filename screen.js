@@ -1,13 +1,12 @@
 
-// create a rolling file logger based on date/time that fires process events
-// const opts = {
-//   errorEventName:'error',
-//       logDirectory:'logs',
-//       fileNamePattern:'roll-<DATE>.log',
-//       dateFormat:'YYYY.MM.DD'
-// };
+const opts = {
+  errorEventName:'error',
+      logDirectory:'logs',
+      fileNamePattern:'roll-<DATE>.log',
+      dateFormat:'YYYY.MM.DD'
+};
 
-// const log = require('simple-node-logger').createRollingFileLogger( opts );
+const log = require('simple-node-logger').createRollingFileLogger( opts );
 
 
 var io = require('socket.io-client');
@@ -15,8 +14,17 @@ const quote = require('shell-quote').quote;
 
 var kill = require('tree-kill');
 
-const socket = io("wss://bs-pager.herokuapp.com")
 // const socket = io("http://localhost:3001")
+const socket = io("wss://bs-pager.herokuapp.com",{
+  transports: ["websocket"],
+  // forceNew: false,
+  reconnection: true,
+  reconnectionDelay: 3000,
+  reconnectionDelayMax: 5000,
+  reconnectionAttempts: Infinity,
+  transports:["polling", "websocket"]
+});
+
 
 let state = {
   running_pids: []
@@ -25,7 +33,7 @@ let state = {
 
 function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
   console.log(socket.id)
-  // log.warn(socket.id);
+  log.warn(socket.id);
   
   state.running_pids.forEach(element => {
     kill(element)
@@ -72,28 +80,28 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
   })
   state.running_pids.push(runner.pid)
   console.log(state.running_pids)
-  // log.warn(state.running_pids);
+  log.warn(state.running_pids);
 
 
   }, 2000);
 }
 
 
-// 
-socket.io.on("reconnect", () => {
-  console.log('reconnected')
-  // log.warn('reconnected');
-});
 
-socket.on("connect_error", () => {
-  // log.warn('connection error ... trying to reconnect ...');
-  console.log('connection error ... trying to reconnect....')
-  socket.connect();
-});
+// socket.io.on("reconnect", () => {
+//   console.log('reconnected')
+//   // log.warn('reconnected');
+// });
+
+// socket.on("connect_error", () => {
+//   // log.warn('connection error ... trying to reconnect ...');
+//   console.log('connection error ... trying to reconnect....')
+//   socket.connect();
+// });
 
 socket.on('connect', function(socketId) {
   
-  // log.warn('connected to server');
+  log.warn('connected to server');
   console.log('connected to server')
   socket.emit('screenConnect', 'create');
   startScreen('init patch', '180,50,80', '70,100,160', '0,0,0', '0.3','-1')
@@ -101,7 +109,7 @@ socket.on('connect', function(socketId) {
 
 
  socket.on('startMessage', function(data) {
-  // log.info(data[0]);
+  log.info(data[0]);
   console.log(data[0])
   console.log(data[1].join())
   console.log(data[2].join())
@@ -110,6 +118,13 @@ socket.on('connect', function(socketId) {
   startScreen(data[0], data[1].join(), data[2].join(), data[3].join(),data[4], data[5])
 
  })
+
+ //heartbeat response
+//  socket.on('ping', function() {
+//    console.log('got ping, sending pong...')
+//   io.sockets.emit('pong');
+//  })
+
 
 
 
