@@ -44,7 +44,7 @@ function startMessage (message) {
      }
  })
 //  runner_pid = runner.pid
-}
+
 
 //    let runner = exec(state.bigString, function(error, stdout, stderr) {
 //       console.log('stdout: ' + stdout)
@@ -64,6 +64,7 @@ function startMessage (message) {
 
   }, 7000);
 
+}
 
 
 // 
