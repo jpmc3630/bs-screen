@@ -17,43 +17,34 @@ let state = {
 
 // running process
 
-// var runner_pid
+var runner_pid
 
 // var options = {shell:true};  
 // streamingTask = spawn('sleep 20',args,options);
 
-var kill  = require('tree-kill');
-const spawn = require('child_process').spawn;
-
-var scriptArgs = ['runtext.sh'];
-var child = spawn('sh', scriptArgs);
-
-// some code to identify when you want to kill the process. Could be
-// a button on the client-side??
-// button.on('someEvent', function(){
-//     // where the killing happens
-    
-// });
-setTimeout(function() {
-
-  // child_process.execFile('closeme.sh', [child.pid], function(error, stdout, stderr){
-  //   console.log(stdout);
-  // });
-  kill(child.pid);
-  // sudo pkill text-scroller
-
-  }, 7000);
-
+// var kill = require('tree-kill');
+var child_process = require('child_process');
+// var spawn = require('child_process').spawn;
+// var execF = 
+//  child
 
 function startMessage (message) {
   
-}
+
   
 
   //  = spawn('seq', '', {detached: true});
-  // var child=spawn('sudo ../text-scroller', ['10000000000']);
 
-
+  var exec = require('child_process').exec;
+  let runner = exec(state.bigString, function(error, stdout, stderr) {
+     console.log('stdout: ' + stdout)
+     // console.log('stderr: ' + stderr);
+     if (error !== null) {
+         console.log('exec error: ' + error)
+     }
+ })
+ runner_pid = runner.pid
+}
 //    let runner = exec(state.bigString, function(error, stdout, stderr) {
 //       console.log('stdout: ' + stdout)
 //       // console.log('stderr: ' + stderr);
@@ -63,7 +54,15 @@ function startMessage (message) {
 //   })
   // runner_pid = runner.pid
 
+  setTimeout(function() {
 
+  child_process.execFile('closeme.sh', [runner.pid], function(error, stdout, stderr){
+    console.log(stdout);
+  });
+  
+
+  }, 7000);
+}
 
 
 // 
