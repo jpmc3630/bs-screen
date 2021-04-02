@@ -143,7 +143,8 @@ socket.on('connect', function(socketId) {
   
   // console.log(JSON.stringify(data, null, 4))
 // console.log(JSON.parse(data))
-console.log(data)
+console.log(data[0])
+console.log(data[1])
 // console.log(data.toString())
 
   // console.log('message: ' + message)
