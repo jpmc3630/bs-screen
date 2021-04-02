@@ -29,7 +29,7 @@ let runner
 
 function startScreen(message, color, colorOutline) {
   
-  if (runner.pid) {
+  if (runner) {
     kill(runner.pid)
     // state.running_pid = null
   }
