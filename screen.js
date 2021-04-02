@@ -72,32 +72,33 @@ function startMessage (message) {
 // this worked on my mac ( i think when i tried it with a dummy 'seq 1000000' or something
 // but doesnt seem to work on raspberry pi with this text scroller shit
     // // killing process
-    var kill = function (pid, signal, callback) {
-      signal   = signal || 'SIGKILL';
-      callback = callback || function () {}
-      var killTree = true;
-      if(killTree) {
-          psTree(pid, function (err, children) {
-              [pid].concat(
-                  children.map(function (p) {
-                      return p.PID;
-                  })
-              ).forEach(function (tpid) {
-                  try { process.kill(tpid, signal) }
-                  catch (ex) { }
-              });
-              callback();
-          });
-      } else {
-          try { process.kill(pid, signal) }
-          catch (ex) { }
-          callback()
-      }
-  };
-  console.log(runner.pid)
-  // killer(runner.pid);
-  killer(1, 'SIGKILL');
+  //   var kill = function (pid, signal, callback) {
+  //     signal   = signal || 'SIGKILL';
+  //     callback = callback || function () {}
+  //     var killTree = true;
+  //     if(killTree) {
+  //         psTree(pid, function (err, children) {
+  //             [pid].concat(
+  //                 children.map(function (p) {
+  //                     return p.PID;
+  //                 })
+  //             ).forEach(function (tpid) {
+  //                 try { process.kill(tpid, signal) }
+  //                 catch (ex) { }
+  //             });
+  //             callback();
+  //         });
+  //     } else {
+  //         try { process.kill(pid, signal) }
+  //         catch (ex) { }
+  //         callback()
+  //     }
+  // };
+  // console.log(runner.pid)
+  // kill(runner.pid);
 
+  
+  kill(1);
   }, 7000);
 
 }
