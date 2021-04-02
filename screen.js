@@ -32,7 +32,7 @@ function startMessage (message) {
 
   
 
-  var child = spawn('seq 10000000000', {detached: true});
+  var child = spawn('seq', '10000000000', {detached: true});
   
 
 // var exec = require('child_process').exec;
