@@ -1,6 +1,8 @@
 // required for the kill process
-var psTree = require('ps-tree');
+// var psTree = require('ps-tree');
 var io = require('socket.io-client');
+const quote = require('shell-quote').quote;
+
 
 const socket = io("wss://bs-pager.herokuapp.com")
 // const socket = io("http://localhost:3001")
@@ -8,7 +10,8 @@ const socket = io("wss://bs-pager.herokuapp.com")
 let state = {
   // currentRoom: '',
   // roomStatus: ''
-  bigString: `sudo ../text-scroller -f ../../fonts/nethack16.bdf --led-chain=8  --led-rows=16 --led-cols=8 --led-multiplexing=18 --led-parallel=2 --led-slowdown-gpio=5 --led-brightness=100 --led-multiplexing=18 --led-pixel-mapper=Flipper -s.5 -C0,20,255 -t-2 lalalaalalalalalalalalalala `
+  // bigString: `sudo ../text-scroller -f ../../fonts/nethack16.bdf --led-chain=8  --led-rows=16 --led-cols=8 --led-multiplexing=18 --led-parallel=2 --led-slowdown-gpio=5 --led-brightness=100 --led-multiplexing=18 --led-pixel-mapper=Flipper -s.5 -C0,20,255 -t-2 lalalaalalalalalalalalalala `
+  bigString: `sudo ../text-scroller -f ../../fonts/nethack16.bdf --led-chain=8  --led-rows=16 --led-cols=8 --led-multiplexing=18 --led-parallel=2 --led-slowdown-gpio=5 --led-brightness=100 --led-multiplexing=18 --led-pixel-mapper=Flipper -t-2 -s.5`
 }
 
 
@@ -26,12 +29,30 @@ var child_process = require('child_process');
 function startMessage (message) {
   
 
-  
+  var cmdArgs = [
+    '../text-scroller',
+    '-f../../fonts/nethack16.bdf', 
+    '--led-chain=8', 
+    '--led-rows=16', 
+    '--led-cols=8', 
+    '--led-multiplexing=18', 
+    '--led-parallel=2', 
+    '--led-slowdown-gpio=5', 
+    '--led-brightness=100', 
+    '--led-pixel-mapper=Flipper', 
+    '-s.3', 
+    '-C0,20,255', 
+    '-t-2', 
+    inputString
+  ];
 
   //  = spawn('seq', '', {detached: true});
+  const sanitizedCmd = quote(cmdArgs);
+// let cmd = state.bigString + ' -C' + state.colorRGB + ' ' + sanitizedInputText
+
 
   var exec = require('child_process').exec;
-  let runner = exec(state.bigString, function(error, stdout, stderr) {
+  let runner = exec(sanitizedCmd, function(error, stdout, stderr) {
      console.log('stdout: ' + stdout)
      // console.log('stderr: ' + stderr);
      if (error !== null) {
