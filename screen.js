@@ -37,7 +37,7 @@ function startMessage (message) {
     '-t-2', 
     'THE STRING WE SPEAK'
   ];
-  var child = spawn('text-scroller', scriptArgs);
+  var child = spawn('./text-scroller', scriptArgs);
 
 
 
