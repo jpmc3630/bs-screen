@@ -140,10 +140,13 @@ socket.on('connect', function(socketId) {
 
  socket.on('startMessage', ({ message, color }) => {
   console.log('start the message')
+  console.log(message)
+  console.log(color)
   // console.log(JSON.stringify(data))
   // console.log(data.message)
   // stopMessage()
-  startMessage(message, color)
+
+  // startMessage(message)
  })
 
 //  socket.on('stopMessage', (data) => {
