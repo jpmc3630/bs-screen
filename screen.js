@@ -24,23 +24,29 @@ var runner_pid
 
 var kill = require('tree-kill');
 
+var spawn = require('child_process').spawn;
+
 
 function startMessage (message) {
   
 
+  
 
-var exec = require('child_process').exec;
-   let runner = exec(state.bigString, function(error, stdout, stderr) {
-      console.log('stdout: ' + stdout)
-      // console.log('stderr: ' + stderr);
-      if (error !== null) {
-          console.log('exec error: ' + error)
-      }
-  })
+  var child = spawn('seq 10000000000', {detached: true});
+  
+
+// var exec = require('child_process').exec;
+//    let runner = exec(state.bigString, function(error, stdout, stderr) {
+//       console.log('stdout: ' + stdout)
+//       // console.log('stderr: ' + stderr);
+//       if (error !== null) {
+//           console.log('exec error: ' + error)
+//       }
+//   })
   // runner_pid = runner.pid
 
   setTimeout(function() {
-    kill(runner.pid);
+    process.kill(child.pid);
   }, 7000);
 }
 
