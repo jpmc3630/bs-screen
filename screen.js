@@ -20,7 +20,7 @@ var runner_pid
 
 
 
-async function startMessage (message) {
+function startMessage (message) {
   
   // state.bigString + message
   // var command="echo '<password>' | sudo -S '<command that needs a root access>'";
@@ -48,7 +48,7 @@ var exec = require('child_process').exec;
 
 // 
 
-async function stopMessage() {
+function stopMessage() {
   
   // // killing process
   var kill = function (pid, signal, callback) {
@@ -74,7 +74,7 @@ async function stopMessage() {
       }
   };
   console.log(runner_pid)
-  process.kill(runner_pid);
+  kill(runner_pid);
 
 }
 
@@ -98,7 +98,7 @@ socket.on('connect', function(socketId) {
 //      console.log('state: ' + JSON.stringify(state, null, 4))
 //  })
 
- socket.on('startMessage', (data) => {
+ socket.on('startMessage', async (data) => {
   console.log('start the message')
   console.log(JSON.stringify(data))
   await stopMessage()
