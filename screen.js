@@ -22,7 +22,7 @@ var runner_pid
 // var options = {shell:true};  
 // streamingTask = spawn('sleep 20',args,options);
 
-// var kill = require('tree-kill');
+var killer = require('tree-kill');
 var child_process = require('child_process');
 // var spawn = require('child_process').spawn;
 // var execF = 
@@ -57,9 +57,20 @@ function startMessage (message) {
 
   setTimeout(function() {
 
+
+    // doesn't work ... tried two ways in script 
+    // sudo pkill text-scroller
+    // and 
+    // kill by pid 
+
   // child_process.execFile('closeme.sh', [runner.pid], function(error, stdout, stderr){
   //   console.log(stdout);
   // });
+
+
+
+// this worked on my mac ( i think when i tried it with a dummy 'seq 1000000' or something
+// but doesnt seem to work on raspberry pi with this text scroller shit
     // // killing process
     var kill = function (pid, signal, callback) {
       signal   = signal || 'SIGKILL';
@@ -84,7 +95,7 @@ function startMessage (message) {
       }
   };
   console.log(runner.pid)
-  kill(runner.pid);
+  killer(runner.pid);
 
   }, 7000);
 
