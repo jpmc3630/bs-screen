@@ -23,9 +23,7 @@ let state = {
 // var options = {shell:true};  
 // streamingTask = spawn('sleep 20',args,options);
 
-var exec = require('child_process').exec;
-
-// var child_process = require('child_process');
+var child_process = require('child_process');
 // var spawn = require('child_process').spawn;
 // var execF = 
 //  child
@@ -62,7 +60,7 @@ function startScreen(message, color, colorOutline) {
 // let cmd = state.bigString + ' -C' + state.colorRGB + ' ' + sanitizedInputText
 
 
-  
+  var exec = require('child_process').exec;
   let runner = exec(sanitizedCmd, function(error, stdout, stderr) {
      console.log('stdout: ' + stdout)
      // console.log('stderr: ' + stderr);
