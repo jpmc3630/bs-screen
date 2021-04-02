@@ -28,6 +28,16 @@ var child_process = require('child_process');
 
 function startScreen(message, color, colorOutline) {
   
+  // 
+  var exec = require('child_process').exec;
+  let runnerKill = exec('pkill -9 text-scroller', function(error, stdout, stderr) {
+     console.log('stdout: ' + stdout)
+     // console.log('stderr: ' + stderr);
+     if (error !== null) {
+         console.log('exec error: ' + error)
+     }
+ })
+
 
   var cmdArgs = [
     '../text-scroller',
@@ -52,7 +62,7 @@ function startScreen(message, color, colorOutline) {
 // let cmd = state.bigString + ' -C' + state.colorRGB + ' ' + sanitizedInputText
 
 
-  var exec = require('child_process').exec;
+  // var exec = require('child_process').exec;
   let runner = exec(sanitizedCmd, function(error, stdout, stderr) {
      console.log('stdout: ' + stdout)
      // console.log('stderr: ' + stderr);
