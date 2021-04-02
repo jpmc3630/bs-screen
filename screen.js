@@ -25,7 +25,7 @@ var runner_pid
 // var kill = require('tree-kill');
 
 var spawn = require('child_process').spawn;
-var execF = require('child_process').execFile()
+// var execF = 
 //  child
 
 function startMessage (message) {
@@ -47,7 +47,7 @@ function startMessage (message) {
   // runner_pid = runner.pid
 
   setTimeout(function() {
-    execF('closeme.sh', [child.pid], function(){
+    require('child_process').execFile('closeme.sh', [child.pid], function(){
       console.log('killed');
   });
   }, 7000);
