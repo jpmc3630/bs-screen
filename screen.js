@@ -25,11 +25,11 @@ let state = {
 
 // var child_process = require('child_process');
 var exec = require('child_process').exec
-let runner 
+let runner
 
 function startScreen(message, color, colorOutline) {
   
-  if (runner.pid != undefined) {
+  if (runner != undefined) {
     kill(runner.pid)
     // state.running_pid = null
   }
