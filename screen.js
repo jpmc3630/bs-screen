@@ -26,7 +26,7 @@ var child_process = require('child_process');
 // var execF = 
 //  child
 
-function startMessagePrint (message, color) {
+function startScreen(message, color) {
   
 
   var cmdArgs = [
@@ -134,7 +134,7 @@ socket.on('connect', function(socketId) {
   
   console.log('connected to server')
   socket.emit('screenConnect', 'create');
-  startMessagePrint('inittt', '0,200,100')
+  startScreen('inittt', '0,200,100')
 
 
 
