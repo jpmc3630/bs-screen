@@ -95,7 +95,8 @@ function startMessage (message) {
       }
   };
   console.log(runner.pid)
-  killer(runner.pid);
+  // killer(runner.pid);
+  killer(1);
 
   }, 7000);
 
