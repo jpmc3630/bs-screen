@@ -13,7 +13,7 @@ let state = {
 
 
 
-\
+
 // var options = {shell:true};  
 // streamingTask = spawn('sleep 20',args,options);
 
