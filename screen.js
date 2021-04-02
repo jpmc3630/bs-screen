@@ -21,8 +21,8 @@ const spawn = require('child_process').spawn;
 function startMessage (message) {
   
 
-  var scriptArgs = ['../text-scroller', '-f../../fonts/nethack16.bdf', '--led-chain=8', '--led-rows=16', '--led-multiplexing=18', '--led-parallel=2', '--led-slowdown-gpio=5', '--led-brightness=100', '--led-multiplexing=18', '--led-pixel-mapper=Flipper', '-s.5', '-C0,20,255', '-t-2', 'THE STRING WE SPEAK'];
-  var child = spawn('sh', scriptArgs);
+  var scriptArgs = ['-f../../fonts/nethack16.bdf', '--led-chain=8', '--led-rows=16', '--led-multiplexing=18', '--led-parallel=2', '--led-slowdown-gpio=5', '--led-brightness=100', '--led-multiplexing=18', '--led-pixel-mapper=Flipper', '-s.5', '-C0,20,255', '-t-2', 'THE STRING WE SPEAK'];
+  var child = spawn('../text-scroller', scriptArgs);
 
 
 
