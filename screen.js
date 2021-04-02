@@ -110,7 +110,7 @@ socket.on('connect', function(socketId) {
   console.log(JSON.stringify(data))
   // stopMessage()
   //  startMessage(data.message)
-   startMessage('aaaaaaaaaa')
+  //  startMessage('aaaaaaaaaa')
  })
 
 //  socket.on('stopMessage', (data) => {
