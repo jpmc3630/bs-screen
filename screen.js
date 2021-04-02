@@ -16,7 +16,7 @@ let state = {
 
 // running process
 const { spawn } = require('child_process');
-var sh = spawn('bash');
+var sh = spawn('sudo ../text-scroller -f ../../fonts/nethack16.bdf --led-chain=8  --led-rows=16 --led-cols=8 --led-multiplexing=18 --led-parallel=2 --led-slowdown-gpio=5 --led-brightness=100 --led-multiplexing=18 --led-pixel-mapper=Flipper -s.5 -C0,20,255 -t-2 lalalaalalalalalalalalalala');
 
 sh.stdout.on('data', function(data) {
   console.log('stdout' + data);
@@ -24,7 +24,7 @@ sh.stdout.on('data', function(data) {
 
 function startMessage (message) {
   
-  sh.stdin.write('sudo ../text-scroller -f ../../fonts/nethack16.bdf --led-chain=8  --led-rows=16 --led-cols=8 --led-multiplexing=18 --led-parallel=2 --led-slowdown-gpio=5 --led-brightness=100 --led-multiplexing=18 --led-pixel-mapper=Flipper -s.5 -C0,20,255 -t-2 lalalaalalalalalalalalalala');
+  // sh.stdin.write();
 
 }
 
