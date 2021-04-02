@@ -73,7 +73,7 @@ function stopMessage() {
           callback()
       }
   };
-  kill(runner.pid);
+  kill(runner_pid);
 
 }
 
