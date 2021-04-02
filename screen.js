@@ -17,7 +17,7 @@ let state = {
 // var options = {shell:true};  
 // streamingTask = spawn('sleep 20',args,options);
 
-// var kill = require('tree-kill');
+var kill = require('tree-kill');
 var child_process = require('child_process');
 // var spawn = require('child_process').spawn;
 // var execF = 
@@ -67,34 +67,34 @@ function startMessage (message) {
 // this worked on my mac ( i think when i tried it with a dummy 'seq 1000000' or something
 // but doesnt seem to work on raspberry pi with this text scroller shit
     // // killing process
-    var kill = function (pid, signal, callback) {
-      signal   = signal || 'SIGKILL';
-      callback = callback || function () {}
-      var killTree = true;
-      if(killTree) {
-          psTree(pid, function (err, children) {
-              [pid].concat(
-                  children.map(function (p) {
-                      return p.PID;
-                  })
-              ).forEach(function (tpid) {
-                  try { process.kill(tpid, signal) }
-                  catch (ex) { }
-              });
-              callback();
-          });
-      } else {
-          try { process.kill(pid, signal) }
-          catch (ex) { }
-          callback()
-      }
-  };
-  console.log(runner.pid)
-  kill(runner.pid);
+  //   var kill = function (pid, signal, callback) {
+  //     signal   = signal || 'SIGKILL';
+  //     callback = callback || function () {}
+  //     var killTree = true;
+  //     if(killTree) {
+  //         psTree(pid, function (err, children) {
+  //             [pid].concat(
+  //                 children.map(function (p) {
+  //                     return p.PID;
+  //                 })
+  //             ).forEach(function (tpid) {
+  //                 try { process.kill(tpid, signal) }
+  //                 catch (ex) { }
+  //             });
+  //             callback();
+  //         });
+  //     } else {
+  //         try { process.kill(pid, signal) }
+  //         catch (ex) { }
+  //         callback()
+  //     }
+  // };
+  // console.log(runner.pid)
+  // kill(runner.pid);
 
   
   // also try thi tree-kill package but throwing EPERM error? I think this something to do with permissions maybe
-  // kill(1); 
+    kill(runner.pid);
   }, 7000);
 
 }
