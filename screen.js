@@ -20,7 +20,7 @@ var runner_pid
 
 
 
-function startMessage (message) {
+async function startMessage (message) {
   
   // state.bigString + message
   // var command="echo '<password>' | sudo -S '<command that needs a root access>'";
@@ -84,7 +84,7 @@ socket.on('connect', function(socketId) {
   
   console.log('connected to server')
   socket.emit('screenConnect', 'create');
-  startMessage('inittt')
+  await startMessage('inittt')
 
 //   socket.on('room', (data) => {
 //     state.currentRoom = data.roomName
@@ -102,7 +102,7 @@ socket.on('connect', function(socketId) {
   console.log('start the message')
   console.log(JSON.stringify(data))
   await stopMessage()
-  startMessage(data.message)
+  await startMessage(data.message)
  })
 
 //  socket.on('stopMessage', (data) => {
