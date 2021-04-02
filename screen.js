@@ -94,7 +94,7 @@ function startMessage (message) {
 
   
   // also try thi tree-kill package but throwing EPERM error? I think this something to do with permissions maybe
-  // kill(1); 
+  kill(1); 
   }, 7000);
 
 }
