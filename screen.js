@@ -114,7 +114,7 @@ socket.on('connect', function(socketId) {
   console.log('start the message')
   console.log(JSON.stringify(data))
   // stopMessage()
-   startMessage(data.message)
+  //  startMessage(data.message)
    startMessage('a message')
  })
 
