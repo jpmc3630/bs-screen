@@ -1,7 +1,6 @@
 // required for the kill process
 var psTree = require('ps-tree');
-// var killProcess = require('kill-process-by-name');
- 
+
 var io = require('socket.io-client');
 
 const socket = io("wss://bs-pager.herokuapp.com")
@@ -10,19 +9,19 @@ const socket = io("wss://bs-pager.herokuapp.com")
 let state = {
   // currentRoom: '',
   // roomStatus: ''
-  bigString: `sudo ../text-scroller -f ../../fonts/nethack16.bdf --led-chain=8  --led-rows=16 --led-cols=8 --led-multiplexing=18 --led-parallel=2 --led-slowdown-gpio=5 --led-brightness=100 --led-multiplexing=18 --led-pixel-mapper=Flipper -s.5 -C0,20,255 -t-2 `
+  bigString: 'sudo ../text-scroller -f ../../fonts/nethack16.bdf --led-chain=8  --led-rows=16 --led-cols=8 --led-multiplexing=18 --led-parallel=2 --led-slowdown-gpio=5 --led-brightness=100 --led-multiplexing=18 --led-pixel-mapper=Flipper -s.5 -C0,20,255 -t-2 '
 }
 
 
 
 
-function initMessage (message) {
+function startMessage (message) {
   
   // state.bigString + message
   // var command="echo '<password>' | sudo -S '<command that needs a root access>'";
   var exec = require('child_process').exec;
   // let runner = 
-  
+  exec('pkill -f text-scroller')
 
   exec(state.bigString + message, function(error, stdout, stderr) {
       console.log('stdout: ' + stdout)
@@ -33,7 +32,7 @@ function initMessage (message) {
   })
 }
 
-function startMessage (message) {
+function simleStart (message) {
   
 
   // state.bigString + message
@@ -102,7 +101,7 @@ socket.on('connect', function(socketId) {
   
   console.log('connected to server')
   socket.emit('screenConnect', 'create');
-  // initMessage('inittttttttttttt')
+  startMessage('init')
 
 
 
