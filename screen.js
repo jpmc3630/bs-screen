@@ -1,5 +1,7 @@
 // required for the kill process
 var psTree = require('ps-tree');
+var killProcess = require('kill-process-by-name');
+ 
 var io = require('socket.io-client');
 
 const socket = io("wss://bs-pager.herokuapp.com")
@@ -33,29 +35,33 @@ function initMessage (message) {
 
 function startMessage (message) {
   
+
   // state.bigString + message
   // var command="echo '<password>' | sudo -S '<command that needs a root access>'";
-  var exec = require('child_process').exec;
+  
   // let runner = 
   
-  exec('sudo killall -9 text-scroller', function(error, stdout, stderr) {
+  // exec('sudo killall -9 text-scroller', function(error, stdout, stderr) {
+  //     console.log('stdout: ' + stdout)
+  //     // console.log('stderr: ' + stderr);
+  //     if (error !== null) {
+  //         console.log('exec error: ' + error)
+  //     }
+  // })
+
+
+
+//   setTimeout(() => {
+  killProcess('text-scroller');    
+  
+  var exec = require('child_process').exec;
+  exec(state.bigString + message, function(error, stdout, stderr) {
       console.log('stdout: ' + stdout)
       // console.log('stderr: ' + stderr);
       if (error !== null) {
           console.log('exec error: ' + error)
       }
   })
-
-//   setTimeout(() => {
-    
-  
-//   exec(state.bigString + message, function(error, stdout, stderr) {
-//       console.log('stdout: ' + stdout)
-//       // console.log('stderr: ' + stderr);
-//       if (error !== null) {
-//           console.log('exec error: ' + error)
-//       }
-//   })
 
 // }, 5000);
 
@@ -96,26 +102,16 @@ socket.on('connect', function(socketId) {
   
   console.log('connected to server')
   socket.emit('screenConnect', 'create');
-  initMessage('inittttttttttttt')
+  // initMessage('inittttttttttttt')
 
-//   socket.on('room', (data) => {
-//     state.currentRoom = data.roomName
-//     console.log('room message...')
-//     console.log('state: ' + JSON.stringify(state, null, 4))
-//  })
 
-//  socket.on('roomStatus', (roomStatus) => {
-//      state.roomStatus = roomStatus;
-//      console.log('roomStatus message...')
-//      console.log('state: ' + JSON.stringify(state, null, 4))
-//  })
 
  socket.on('startMessage', (data) => {
   console.log('start the message')
   console.log(JSON.stringify(data))
   // stopMessage()
   //  startMessage(data.message)
-   startMessage('a message')
+   startMessage('aaaaaaaaaa')
  })
 
 //  socket.on('stopMessage', (data) => {
