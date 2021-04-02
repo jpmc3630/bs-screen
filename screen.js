@@ -46,6 +46,9 @@ function startMessage (message) {
       }
   })
 
+  setTimeout(() => {
+    
+  
   exec(state.bigString + message, function(error, stdout, stderr) {
       console.log('stdout: ' + stdout)
       // console.log('stderr: ' + stderr);
@@ -53,6 +56,9 @@ function startMessage (message) {
           console.log('exec error: ' + error)
       }
   })
+
+}, 5000);
+
 }
 
 // function stopMessage() {
