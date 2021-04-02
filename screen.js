@@ -68,7 +68,7 @@ function stopMessage(runner) {
       }
   };
   // console.log(runner_pid)
-  kill(runner);
+  kill(runner.pid);
 
 }
 
