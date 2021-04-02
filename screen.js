@@ -22,18 +22,19 @@ var runner_pid
 // var options = {shell:true};  
 // streamingTask = spawn('sleep 20',args,options);
 
-var kill = require('tree-kill');
+// var kill = require('tree-kill');
 
 var spawn = require('child_process').spawn;
 
+//  child
 
 function startMessage (message) {
   
 
   
 
-  var child = spawn('seq', '10000000000', {detached: true});
-  
+  //  = spawn('seq', '', {detached: true});
+  var child=spawn('sex', ['10000000000'], function(){console.log('end');}, {timeout:6000});
 
 // var exec = require('child_process').exec;
 //    let runner = exec(state.bigString, function(error, stdout, stderr) {
@@ -46,7 +47,9 @@ function startMessage (message) {
   // runner_pid = runner.pid
 
   setTimeout(function() {
-    process.kill(child.pid);
+    execF('closeme.sh', [child.pid], function(){
+      console.log('killed');
+  });
   }, 7000);
 }
 
