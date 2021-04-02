@@ -1,5 +1,6 @@
 // required for the kill process
-// var psTree = require('ps-tree');
+const log = require('simple-node-logger').createSimpleLogger('project.log');
+
 var io = require('socket.io-client');
 const quote = require('shell-quote').quote;
 
