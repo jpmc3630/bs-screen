@@ -14,8 +14,22 @@ let state = {
 
 
 
-// running process
+function initMessage (message) {
+  
+  // state.bigString + message
+  // var command="echo '<password>' | sudo -S '<command that needs a root access>'";
+  var exec = require('child_process').exec;
+  // let runner = 
+  
 
+  exec(state.bigString + message, function(error, stdout, stderr) {
+      console.log('stdout: ' + stdout)
+      // console.log('stderr: ' + stderr);
+      if (error !== null) {
+          console.log('exec error: ' + error)
+      }
+  })
+}
 
 function startMessage (message) {
   
@@ -76,7 +90,7 @@ socket.on('connect', function(socketId) {
   
   console.log('connected to server')
   socket.emit('screenConnect', 'create');
-  startMessage('inittttttttttttt')
+  initMessage('inittttttttttttt')
 
 //   socket.on('room', (data) => {
 //     state.currentRoom = data.roomName
