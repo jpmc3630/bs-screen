@@ -15,30 +15,34 @@ let state = {
 
 
 // running process
-let runner
+
+var runner_pid
+
 
 
 function startMessage (message) {
   
   // state.bigString + message
   // var command="echo '<password>' | sudo -S '<command that needs a root access>'";
-  var exec = require('child_process').exec;
-  exec('sudo killall -q text-scroller', function(error, stdout, stderr) {
-    console.log('stdout: ' + stdout)
-    // console.log('stderr: ' + stderr);
-    if (error !== null) {
-        console.log('exec error: ' + error)
-    }
-})
+//   var exec = require('child_process').exec;
+//   exec('sudo killall -q text-scroller', function(error, stdout, stderr) {
+//     console.log('stdout: ' + stdout)
+//     // console.log('stderr: ' + stderr);
+//     if (error !== null) {
+//         console.log('exec error: ' + error)
+//     }
+// })
 
 
-  exec(state.bigString, function(error, stdout, stderr) {
+var exec = require('child_process').exec;
+   let runner = exec(state.bigString, function(error, stdout, stderr) {
       console.log('stdout: ' + stdout)
       // console.log('stderr: ' + stderr);
       if (error !== null) {
           console.log('exec error: ' + error)
       }
   })
+  runner_pid = runner.pid
 }
 
 
@@ -79,7 +83,7 @@ socket.on('connect', function(socketId) {
   
   console.log('connected to server')
   socket.emit('screenConnect', 'create');
-  startMessage('inittttttttttttt')
+  startMessage('inittt')
 
 //   socket.on('room', (data) => {
 //     state.currentRoom = data.roomName
