@@ -142,7 +142,7 @@ socket.on('connect', function(socketId) {
   // console.log('start the message')
   
   // console.log(JSON.stringify(data, null, 4))
-console.log(data)
+console.log(data.message)
 
   // console.log('message: ' + message)
   // console.log('color: ' + color)
