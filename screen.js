@@ -1,6 +1,6 @@
 // required for the kill process
 var psTree = require('ps-tree');
-var killProcess = require('kill-process-by-name');
+// var killProcess = require('kill-process-by-name');
  
 var io = require('socket.io-client');
 
