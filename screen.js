@@ -27,7 +27,7 @@ let state = {
 
 
 function startScreen(message, color, colorOutline) {
-  
+  console.log(socket.id)
   state.running_pids.forEach(element => {
     kill(element)
     
@@ -101,10 +101,18 @@ function startScreen(message, color, colorOutline) {
 
 
 // 
+socket.io.on("reconnect", () => {
+  console.log('doing a reconnect')
+});
 
+socket.on("connect_error", () => {
+  console.log('connection error ... trying to reconnect....')
+  socket.connect();
+});
 
 socket.on('connect', function(socketId) {
   
+
   console.log('connected to server')
   socket.emit('screenConnect', 'create');
   startScreen('inittt', '200,50,100', '70,100,180')
