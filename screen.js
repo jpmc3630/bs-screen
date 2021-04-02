@@ -26,7 +26,7 @@ var child_process = require('child_process');
 // var execF = 
 //  child
 
-function startMessage (message) {
+function startMessage (message, color) {
   
 
   var cmdArgs = [
@@ -41,7 +41,7 @@ function startMessage (message) {
     '--led-brightness=100', 
     '--led-pixel-mapper=Flipper', 
     '-s.3', 
-    '-C120,20,50', 
+    '-C' + color, 
     '-t-2', 
     message
   ];
@@ -138,12 +138,12 @@ socket.on('connect', function(socketId) {
 
 
 
- socket.on('startMessage', (data) => {
+ socket.on('startMessage', ({ message, color }) => {
   console.log('start the message')
-  console.log(JSON.stringify(data))
+  // console.log(JSON.stringify(data))
   // console.log(data.message)
   // stopMessage()
-  startMessage('IIIIIIIII')
+  startMessage(message, color)
  })
 
 //  socket.on('stopMessage', (data) => {
