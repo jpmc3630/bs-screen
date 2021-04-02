@@ -23,7 +23,7 @@ let state = {
 }
 
 
-function startScreen(message, color, colorOutline, bgColor) {
+function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
   console.log(socket.id)
   log.warn(socket.id);
   
