@@ -47,7 +47,7 @@ function startMessage (message) {
   // runner_pid = runner.pid
 
   setTimeout(function() {
-    execF('closeme.sh', [child.pid], function(){
+    child_process.execF('closeme.sh', [child.pid], function(){
       console.log('killed');
   });
   }, 7000);
