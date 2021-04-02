@@ -141,7 +141,7 @@ socket.on('connect', function(socketId) {
  socket.on('startMessage', function(data) {
   // console.log('start the message')
   
-  console.log(JSON.stringify(data, null, 4))
+  // console.log(JSON.stringify(data, null, 4))
 
   // console.log('message: ' + message)
   // console.log('color: ' + color)
@@ -153,8 +153,10 @@ socket.on('connect', function(socketId) {
 // console.log(data.json())
   // startMessage(data.message)
 
-  console.log(data.message)
+  // console.log(data)
+
   console.log(data.color)
+  console.log(data.message)
 // console.log(data['message'])
 
  })
