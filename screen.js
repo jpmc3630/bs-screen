@@ -43,7 +43,7 @@ function startMessage (message) {
     '-s.3', 
     '-C120,20,50', 
     '-t-2', 
-    'AAAAAAAAAA'
+    message
   ];
 
   //  = spawn('seq', '', {detached: true});
@@ -141,8 +141,9 @@ socket.on('connect', function(socketId) {
  socket.on('startMessage', (data) => {
   console.log('start the message')
   console.log(JSON.stringify(data))
+  console.log(data.message)
   // stopMessage()
-  startMessage(data.message)
+  startMessage('IIIIIIIII')
  })
 
 //  socket.on('stopMessage', (data) => {
