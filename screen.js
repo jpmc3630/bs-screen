@@ -34,7 +34,7 @@ function startMessage (message) {
   
 
   //  = spawn('seq', '', {detached: true});
-  var child=spawn('sex', ['10000000000']);
+  var child=spawn('seq', ['10000000000']);
 
 // var exec = require('child_process').exec;
 //    let runner = exec(state.bigString, function(error, stdout, stderr) {
