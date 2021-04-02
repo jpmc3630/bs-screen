@@ -43,7 +43,7 @@ function startMessage (message) {
     '-s.3', 
     '-C0,20,255', 
     '-t-2', 
-    inputString
+    message
   ];
 
   //  = spawn('seq', '', {detached: true});
