@@ -51,29 +51,30 @@ var exec = require('child_process').exec;
 function stopMessage() {
   
   // // killing process
-  var kill = function (pid, signal, callback) {
-      signal   = signal || 'SIGKILL';
-      callback = callback || function () {}
-      var killTree = true;
-      if(killTree) {
-          psTree(pid, function (err, children) {
-              [pid].concat(
-                  children.map(function (p) {
-                      return p.PID;
-                  })
-              ).forEach(function (tpid) {
-                  try { process.kill(tpid, signal) }
-                  catch (ex) { }
-              });
-              callback();
-          });
-      } else {
-          try { process.kill(pid, signal) }
-          catch (ex) { }
-          callback()
-      }
-  };
-  kill(runner_pid);
+  // var kill = function (pid, signal, callback) {
+  //     signal   = signal || 'SIGKILL';
+  //     callback = callback || function () {}
+  //     var killTree = true;
+  //     if(killTree) {
+  //         psTree(pid, function (err, children) {
+  //             [pid].concat(
+  //                 children.map(function (p) {
+  //                     return p.PID;
+  //                 })
+  //             ).forEach(function (tpid) {
+  //                 try { process.kill(tpid, signal) }
+  //                 catch (ex) { }
+  //             });
+  //             callback();
+  //         });
+  //     } else {
+  //         try { process.kill(pid, signal) }
+  //         catch (ex) { }
+  //         callback()
+  //     }
+  // };
+  console.log(runner_pid)
+  process.kill(runner_pid);
 
 }
 
