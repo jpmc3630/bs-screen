@@ -22,16 +22,6 @@ var runner_pid
 
 function startMessage (message) {
   
-  // state.bigString + message
-  // var command="echo '<password>' | sudo -S '<command that needs a root access>'";
-//   var exec = require('child_process').exec;
-//   exec('sudo killall -q text-scroller', function(error, stdout, stderr) {
-//     console.log('stdout: ' + stdout)
-//     // console.log('stderr: ' + stderr);
-//     if (error !== null) {
-//         console.log('exec error: ' + error)
-//     }
-// })
 
 
 var exec = require('child_process').exec;
@@ -84,25 +74,15 @@ socket.on('connect', function(socketId) {
   
   console.log('connected to server')
   socket.emit('screenConnect', 'create');
-  await startMessage('inittt')
+  startMessage('inittt')
 
-//   socket.on('room', (data) => {
-//     state.currentRoom = data.roomName
-//     console.log('room message...')
-//     console.log('state: ' + JSON.stringify(state, null, 4))
-//  })
 
-//  socket.on('roomStatus', (roomStatus) => {
-//      state.roomStatus = roomStatus;
-//      console.log('roomStatus message...')
-//      console.log('state: ' + JSON.stringify(state, null, 4))
-//  })
 
- socket.on('startMessage', async (data) => {
+ socket.on('startMessage', (data) => {
   console.log('start the message')
   console.log(JSON.stringify(data))
-  await stopMessage()
-  await startMessage(data.message)
+  stopMessage()
+  startMessage(data.message)
  })
 
 //  socket.on('stopMessage', (data) => {
