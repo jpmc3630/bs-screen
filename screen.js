@@ -23,16 +23,15 @@ let state = {
 // var options = {shell:true};  
 // streamingTask = spawn('sleep 20',args,options);
 
-var child_process = require('child_process');
-// var spawn = require('child_process').spawn;
-// var execF = 
-//  child
+// var child_process = require('child_process');
+var exec = require('child_process').exec
+let runner
 
 function startScreen(message, color, colorOutline) {
   
-  if (state.running_pid != null) {
-    kill(state.running_pid)
-    state.running_pid = null
+  if (runner.pid) {
+    kill(runner.pid)
+    // state.running_pid = null
   }
 
   // pkill -9 text-scroller
@@ -60,15 +59,15 @@ function startScreen(message, color, colorOutline) {
 // let cmd = state.bigString + ' -C' + state.colorRGB + ' ' + sanitizedInputText
 
 
-  var exec = require('child_process').exec;
-  let runner = exec(sanitizedCmd, function(error, stdout, stderr) {
+  
+  runner = exec(sanitizedCmd, function(error, stdout, stderr) {
      console.log('stdout: ' + stdout)
      // console.log('stderr: ' + stderr);
      if (error !== null) {
          console.log('exec error: ' + error)
      }
  })
- state.running_pid = runner.pid
+//  state.running_pid = runner.pid
 
 
 //    let runner = exec(state.bigString, function(error, stdout, stderr) {
