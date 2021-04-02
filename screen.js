@@ -46,18 +46,18 @@ function startMessage (message) {
       }
   })
 
-  setTimeout(() => {
+//   setTimeout(() => {
     
   
-  exec(state.bigString + message, function(error, stdout, stderr) {
-      console.log('stdout: ' + stdout)
-      // console.log('stderr: ' + stderr);
-      if (error !== null) {
-          console.log('exec error: ' + error)
-      }
-  })
+//   exec(state.bigString + message, function(error, stdout, stderr) {
+//       console.log('stdout: ' + stdout)
+//       // console.log('stderr: ' + stderr);
+//       if (error !== null) {
+//           console.log('exec error: ' + error)
+//       }
+//   })
 
-}, 5000);
+// }, 5000);
 
 }
 
