@@ -51,11 +51,11 @@ function startScreen(message, color, colorOutline, bgColor) {
       '--led-slowdown-gpio=5', 
       '--led-brightness=100', 
       '--led-pixel-mapper=Flipper', 
-      '-s.3', 
+      '-s' + speed, 
       '-C' + color, 
       '-O' + colorOutline, 
       '-B' + bgColor, 
-      '-t-1', 
+      '-t' + spacing, 
       message
     ];
 
@@ -96,7 +96,7 @@ socket.on('connect', function(socketId) {
   log.warn('connected to server');
   console.log('connected to server')
   socket.emit('screenConnect', 'create');
-  startScreen('init patch', '180,50,80', '70,100,160', '0,0,0')
+  startScreen('init patch', '180,50,80', '70,100,160', '0,0,0', '0.3','-1')
 
 
 
@@ -107,7 +107,7 @@ socket.on('connect', function(socketId) {
   console.log(data[2].join())
   console.log(data[3].join())
 
-  startScreen(data[0], data[1].join(), data[2].join(), data[3].join())
+  startScreen(data[0], data[1].join(), data[2].join(), data[3].join(),data[4], data[5])
 
  })
 
