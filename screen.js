@@ -33,6 +33,9 @@ function startScreen(message, color, colorOutline) {
   });
 
   // pkill -9 text-scroller
+  setTimeout(() => {
+    
+  
 
   var cmdArgs = [
     '../text-scroller',
@@ -67,7 +70,7 @@ function startScreen(message, color, colorOutline) {
      }
  })
  state.running_pids.push(runner.pid)
-
+ console.log(state.running_pids)
 
 //    let runner = exec(state.bigString, function(error, stdout, stderr) {
 //       console.log('stdout: ' + stdout)
@@ -88,7 +91,7 @@ function startScreen(message, color, colorOutline) {
 
   //   kill(runner.pid);
   // }, 7000);
-
+  }, 2000);
 }
 
 
