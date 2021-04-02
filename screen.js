@@ -16,13 +16,14 @@ let state = {
 
 var kill = require('tree-kill');
 // var child_process = require('child_process');
-const { spawn } = require('child_process');
+// const { spawn } = require('child_process');
+const spawn = require('child_process').spawn;
 
 function startMessage (message) {
   
 
   var scriptArgs = [
-    '-f../../fonts/nethack16.bdf', 
+    '-f../fonts/nethack16.bdf', 
     '--led-chain=8', 
     '--led-rows=16', 
     '--led-cols=8', 
@@ -36,7 +37,7 @@ function startMessage (message) {
     '-t-2', 
     'THE STRING WE SPEAK'
   ];
-  var child = spawn('../text-scroller', scriptArgs);
+  var child = spawn('text-scroller', scriptArgs);
 
 
 
