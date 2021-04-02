@@ -55,7 +55,7 @@ function startMessage (message) {
   // killProcess('text-scroller');    
   
   var exec = require('child_process').exec;
-  exec(state.bigString + message, function(error, stdout, stderr) {
+  exec('hello', function(error, stdout, stderr) {
       console.log('stdout: ' + stdout)
       // console.log('stderr: ' + stderr);
       if (error !== null) {
