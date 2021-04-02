@@ -13,12 +13,7 @@ let state = {
 
 
 
-
-
-// running process
-
-var runner_pid
-
+\
 // var options = {shell:true};  
 // streamingTask = spawn('sleep 20',args,options);
 
@@ -98,7 +93,8 @@ function startMessage (message) {
   // kill(runner.pid);
 
   
-  kill(1);
+  // also try thi tree-kill package but throwing EPERM error? I think this something to do with permissions maybe
+  // kill(1); 
   }, 7000);
 
 }
@@ -108,34 +104,9 @@ function startMessage (message) {
 
 function stopMessage(runner) {
   
-    // // killing process
-  //   var kill = function (pid, signal, callback) {
-  //     signal   = signal || 'SIGKILL';
-  //     callback = callback || function () {}
-  //     var killTree = true;
-  //     if(killTree) {
-  //         psTree(pid, function (err, children) {
-  //             [pid].concat(
-  //                 children.map(function (p) {
-  //                     return p.PID;
-  //                 })
-  //             ).forEach(function (tpid) {
-  //                 try { process.kill(tpid, signal) }
-  //                 catch (ex) { }
-  //             });
-  //             callback();
-  //         });
-  //     } else {
-  //         try { process.kill(pid, signal) }
-  //         catch (ex) { }
-  //         callback()
-  //     }
-  // };
-  // console.log(runner.pid)
-  // kill(runner.pid);
+
 
 }
-
 
 
 socket.on('connect', function(socketId) {
