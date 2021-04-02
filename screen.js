@@ -17,7 +17,7 @@ let state = {
 
 // running process
 
-var runner_pid
+// var runner_pid
 
 // var options = {shell:true};  
 // streamingTask = spawn('sleep 20',args,options);
@@ -34,14 +34,24 @@ var child = spawn('sh', scriptArgs);
 //     // where the killing happens
     
 // });
+setTimeout(function() {
+
+  // child_process.execFile('closeme.sh', [child.pid], function(error, stdout, stderr){
+  //   console.log(stdout);
+  // });
+  kill(child.pid);
+  // sudo pkill text-scroller
+
+  }, 7000);
+
 
 function startMessage (message) {
   
-
+}
   
 
   //  = spawn('seq', '', {detached: true});
-  var child=spawn('sudo ../text-scroller', ['10000000000']);
+  // var child=spawn('sudo ../text-scroller', ['10000000000']);
 
 
 //    let runner = exec(state.bigString, function(error, stdout, stderr) {
@@ -53,16 +63,7 @@ function startMessage (message) {
 //   })
   // runner_pid = runner.pid
 
-  setTimeout(function() {
 
-  // child_process.execFile('closeme.sh', [child.pid], function(error, stdout, stderr){
-  //   console.log(stdout);
-  // });
-  kill(child.pid);
-  // sudo pkill text-scroller
-
-  }, 7000);
-}
 
 
 // 
