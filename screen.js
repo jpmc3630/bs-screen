@@ -96,7 +96,7 @@ socket.on('connect', function(socketId) {
   log.warn('connected to server');
   console.log('connected to server')
   socket.emit('screenConnect', 'create');
-  startScreen('inittt', '180,50,80', '70,100,160', '0,0,0')
+  startScreen('init patch', '180,50,80', '70,100,160', '0,0,0')
 
 
 
