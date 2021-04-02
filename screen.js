@@ -150,7 +150,7 @@ socket.on('connect', function(socketId) {
   // console.log(data.message)
   // stopMessage()
 
-  // startMessage(message, color)
+  startMessage(message)
  })
 
 //  socket.on('stopMessage', (data) => {
