@@ -43,8 +43,9 @@ function startMessage (message) {
          console.log('exec error: ' + error)
      }
  })
- runner_pid = runner.pid
+//  runner_pid = runner.pid
 }
+
 //    let runner = exec(state.bigString, function(error, stdout, stderr) {
 //       console.log('stdout: ' + stdout)
 //       // console.log('stderr: ' + stderr);
