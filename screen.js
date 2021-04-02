@@ -21,7 +21,7 @@ function startMessage (message) {
   // var command="echo '<password>' | sudo -S '<command that needs a root access>'";
   var exec = require('child_process').exec;
   // let runner = 
-  exec('pkill -f text-scroller')
+  // exec('pkill -f text-scroller')
 
   exec(state.bigString + message, function(error, stdout, stderr) {
       console.log('stdout: ' + stdout)
@@ -101,7 +101,7 @@ socket.on('connect', function(socketId) {
   
   console.log('connected to server')
   socket.emit('screenConnect', 'create');
-  startMessage('init')
+  // startMessage('init')
 
 
 
