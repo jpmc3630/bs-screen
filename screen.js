@@ -16,7 +16,7 @@ let state = {
 
 // running process
 const { spawn } = require('child_process');
-var sh = spawn('shell');
+var sh = spawn('bash');
 
 sh.stdout.on('data', function(data) {
   console.log('stdout' + data);
