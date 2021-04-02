@@ -31,7 +31,7 @@ var child_process = require('child_process');
 function startScreen(message, color, colorOutline) {
   
   if (running_pid != null) {
-    kill(running_pid)
+    kill(state.running_pid)
     state.running_pid = null
   }
 
