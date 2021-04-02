@@ -22,11 +22,18 @@ var runner_pid
 // var options = {shell:true};  
 // streamingTask = spawn('sleep 20',args,options);
 
-// var kill = require('tree-kill');
-var child_process = require('child_process');
-var spawn = require('child_process').spawn;
-// var execF = 
-//  child
+var kill  = require('tree-kill');
+const spawn = require('child_process').spawn;
+
+var scriptArgs = ['runtext.sh'];
+var child = spawn('sh', scriptArgs);
+
+// some code to identify when you want to kill the process. Could be
+// a button on the client-side??
+// button.on('someEvent', function(){
+//     // where the killing happens
+    
+// });
 
 function startMessage (message) {
   
@@ -34,7 +41,7 @@ function startMessage (message) {
   
 
   //  = spawn('seq', '', {detached: true});
-  var child=spawn('seq', ['10000000000']);
+  var child=spawn('sudo ../text-scroller', ['10000000000']);
 
 
 //    let runner = exec(state.bigString, function(error, stdout, stderr) {
@@ -48,9 +55,11 @@ function startMessage (message) {
 
   setTimeout(function() {
 
-  child_process.execFile('closeme.sh', [child.pid], function(error, stdout, stderr){
-    console.log(stdout);
-  });
+  // child_process.execFile('closeme.sh', [child.pid], function(error, stdout, stderr){
+  //   console.log(stdout);
+  // });
+  kill(child.pid);
+  // sudo pkill text-scroller
 
   }, 7000);
 }
