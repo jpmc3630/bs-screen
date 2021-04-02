@@ -1,5 +1,14 @@
 // required for the kill process
-const log = require('simple-node-logger').createSimpleLogger('project.log');
+// create a rolling file logger based on date/time that fires process events
+const opts = {
+  errorEventName:'error',
+      logDirectory:'/mylogfiles', // NOTE: folder must exist and be writable...
+      fileNamePattern:'roll-<DATE>.log',
+      dateFormat:'YYYY.MM.DD'
+};
+
+const log = require('simple-node-logger').createRollingFileLogger( opts );
+
 
 var io = require('socket.io-client');
 const quote = require('shell-quote').quote;
@@ -27,7 +36,7 @@ let state = {
 // var child_process = require('child_process');
 
 
-function startScreen(message, color, colorOutline) {
+function startScreen(message, color, colorOutline, bgColor) {
   console.log(socket.id)
   state.running_pids.forEach(element => {
     kill(element)
@@ -57,7 +66,8 @@ function startScreen(message, color, colorOutline) {
     '-s.3', 
     '-C' + color, 
     '-O' + colorOutline, 
-    '-t-2', 
+    '-B' + bgColor, 
+    '-t-1', 
     message
   ];
 
@@ -103,17 +113,19 @@ function startScreen(message, color, colorOutline) {
 
 // 
 socket.io.on("reconnect", () => {
-  console.log('doing a reconnect')
+  console.log('reconnected')
+  log.warn('reconnected');
 });
 
 socket.on("connect_error", () => {
+  log.warn('connection error ... trying to reconnect ...');
   console.log('connection error ... trying to reconnect....')
   socket.connect();
 });
 
 socket.on('connect', function(socketId) {
   
-
+  log.warn('connected to server');
   console.log('connected to server')
   socket.emit('screenConnect', 'create');
   startScreen('inittt', '200,50,100', '70,100,180')
@@ -121,12 +133,13 @@ socket.on('connect', function(socketId) {
 
 
  socket.on('startMessage', function(data) {
-  
+  log.info(data[0]);
   console.log(data[0])
   console.log(data[1].join())
   console.log(data[2].join())
+  console.log(data[3].join())
 
-  startScreen(data[0], data[1].join(), data[2].join())
+  startScreen(data[0], data[1].join(), data[2].join(), data[3].join())
 
  })
 
