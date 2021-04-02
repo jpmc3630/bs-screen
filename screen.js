@@ -153,13 +153,9 @@ socket.on('connect', function(socketId) {
 // console.log(data.json())
   // startMessage(data.message)
 
-  console.log(Object.keys(data))
+  console.log(data.message)
 // console.log(data['message'])
-data
-  .map(obj => obj.toJSON())
-  .forEach(obj => {
-    console.log(obj.message);
-  })
+
  })
 
 //  socket.on('stopMessage', (data) => {
