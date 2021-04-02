@@ -14,11 +14,16 @@ let state = {
 
 
 
+
 // running process
 
 var runner_pid
 
+// var options = {shell:true};  
+// streamingTask = spawn('sleep 20',args,options);
 
+//var kill = require('tree-kill');
+// kill(streamingTask.pid);
 
 function startMessage (message) {
   
@@ -67,8 +72,8 @@ function stopMessage(runner) {
           callback()
       }
   };
-  // console.log(runner_pid)
-  kill(runner.pid);
+  console.log(runner.PID)
+  kill(runner.PID);
 
 }
 
@@ -85,7 +90,7 @@ socket.on('connect', function(socketId) {
  socket.on('startMessage', (data) => {
   console.log('start the message')
   console.log(JSON.stringify(data))
-  stopMessage()
+  // stopMessage()
   startMessage(data.message)
  })
 
