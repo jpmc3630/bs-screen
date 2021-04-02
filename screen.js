@@ -63,7 +63,7 @@ function startMessage (message) {
   
 
   }, 7000);
-}
+
 
 
 // 
