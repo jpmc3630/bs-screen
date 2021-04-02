@@ -23,7 +23,7 @@ var runner_pid
 // streamingTask = spawn('sleep 20',args,options);
 
 // var kill = require('tree-kill');
-
+var child_process = require('child_process');
 var spawn = require('child_process').spawn;
 // var execF = 
 //  child
@@ -47,9 +47,11 @@ function startMessage (message) {
   // runner_pid = runner.pid
 
   setTimeout(function() {
-    require('child_process').execFile('closeme.sh', [child.pid], function(){
-      console.log('killed');
+
+  child_process.execFile('closeme.sh', [child.pid], function(error, stdout, stderr){
+    console.log(stdout);
   });
+
   }, 7000);
 }
 
