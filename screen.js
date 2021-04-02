@@ -22,7 +22,7 @@ var runner_pid
 // var options = {shell:true};  
 // streamingTask = spawn('sleep 20',args,options);
 
-var killer = require('tree-kill');
+var kill = require('tree-kill');
 var child_process = require('child_process');
 // var spawn = require('child_process').spawn;
 // var execF = 
