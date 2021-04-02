@@ -3,6 +3,7 @@
 var io = require('socket.io-client');
 const quote = require('shell-quote').quote;
 
+var kill = require('tree-kill');
 
 const socket = io("wss://bs-pager.herokuapp.com")
 // const socket = io("http://localhost:3001")
@@ -22,15 +23,14 @@ let state = {
 // var options = {shell:true};  
 // streamingTask = spawn('sleep 20',args,options);
 
-var kill = require('tree-kill');
-var child_process = require('child_process');
+// var child_process = require('child_process');
 // var spawn = require('child_process').spawn;
 // var execF = 
 //  child
 
 function startScreen(message, color, colorOutline) {
   
-  if (running_pid != null) {
+  if (state.running_pid != null) {
     kill(state.running_pid)
     state.running_pid = null
   }
