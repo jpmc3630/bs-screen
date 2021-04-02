@@ -135,7 +135,7 @@ socket.on('connect', function(socketId) {
   
   console.log('connected to server')
   socket.emit('screenConnect', 'create');
-  startScreen('inittt', '200,50,100')
+  startScreen('inittt', '200,50,100', '70,100,180')
 
 
 
