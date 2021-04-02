@@ -134,36 +134,16 @@ socket.on('connect', function(socketId) {
   
   console.log('connected to server')
   socket.emit('screenConnect', 'create');
-  startScreen('inittt', '0,200,100')
+  startScreen('inittt', '200,50,100')
 
 
 
  socket.on('startMessage', function(data) {
-  // console.log('start the message')
   
-  // console.log(JSON.stringify(data, null, 4))
-// console.log(JSON.parse(data))
-console.log(data[0])
-console.log(data[1].join())
+  console.log(data[0])
+  console.log(data[1].join())
 
-// console.log()
-// console.log(data.toString())
-
-  // console.log('message: ' + message)
-  // console.log('color: ' + color)
-
-  // console.log(JSON.stringify(data))
-  // console.log(data.message)
-  // stopMessage()
-// console.log(data.json().message)
-// console.log(data.json())
-  startMessage(data[0], data[1].join())
-
-  // console.log(data)
-
-  // console.log(data.color)
-  // console.log(data.message)
-// console.log(data[0])
+  startScreen(data[0], data[1].join())
 
  })
 
