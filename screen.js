@@ -38,11 +38,10 @@ var exec = require('child_process').exec;
       }
   })
   // runner_pid = runner.pid
-  console.log(runner.PID)
-  console.log(runner.pid)
-  // setTimeout(() => {
-  //   stopMessage(runner)
-  // }, 7000);
+
+  setTimeout(function() {
+    stopMessage(runner)
+  }, 7000);
 }
 
 
@@ -73,8 +72,8 @@ function stopMessage(runner) {
           callback()
       }
   };
-  console.log(runner.PID)
-  kill(runner.PID);
+  console.log(runner.pid)
+  kill(runner.pid);
 
 }
 
