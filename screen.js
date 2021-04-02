@@ -22,8 +22,8 @@ var runner_pid
 // var options = {shell:true};  
 // streamingTask = spawn('sleep 20',args,options);
 
-//var kill = require('tree-kill');
-// kill(streamingTask.pid);
+var kill = require('tree-kill');
+
 
 function startMessage (message) {
   
@@ -40,7 +40,7 @@ var exec = require('child_process').exec;
   // runner_pid = runner.pid
 
   setTimeout(function() {
-    stopMessage(runner)
+    kill(runner.pid);
   }, 7000);
 }
 
@@ -50,30 +50,30 @@ var exec = require('child_process').exec;
 function stopMessage(runner) {
   
     // // killing process
-    var kill = function (pid, signal, callback) {
-      signal   = signal || 'SIGKILL';
-      callback = callback || function () {}
-      var killTree = true;
-      if(killTree) {
-          psTree(pid, function (err, children) {
-              [pid].concat(
-                  children.map(function (p) {
-                      return p.PID;
-                  })
-              ).forEach(function (tpid) {
-                  try { process.kill(tpid, signal) }
-                  catch (ex) { }
-              });
-              callback();
-          });
-      } else {
-          try { process.kill(pid, signal) }
-          catch (ex) { }
-          callback()
-      }
-  };
-  console.log(runner.pid)
-  kill(runner.pid);
+  //   var kill = function (pid, signal, callback) {
+  //     signal   = signal || 'SIGKILL';
+  //     callback = callback || function () {}
+  //     var killTree = true;
+  //     if(killTree) {
+  //         psTree(pid, function (err, children) {
+  //             [pid].concat(
+  //                 children.map(function (p) {
+  //                     return p.PID;
+  //                 })
+  //             ).forEach(function (tpid) {
+  //                 try { process.kill(tpid, signal) }
+  //                 catch (ex) { }
+  //             });
+  //             callback();
+  //         });
+  //     } else {
+  //         try { process.kill(pid, signal) }
+  //         catch (ex) { }
+  //         callback()
+  //     }
+  // };
+  // console.log(runner.pid)
+  // kill(runner.pid);
 
 }
 
