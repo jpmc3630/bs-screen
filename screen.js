@@ -26,7 +26,7 @@ var child_process = require('child_process');
 // var execF = 
 //  child
 
-function startScreen(message, color) {
+function startScreen(message, color, colorOutline) {
   
 
   var cmdArgs = [
@@ -42,6 +42,7 @@ function startScreen(message, color) {
     '--led-pixel-mapper=Flipper', 
     '-s.3', 
     '-C' + color, 
+    '-O' + colorOutline, 
     '-t-2', 
     message
   ];
@@ -142,8 +143,9 @@ socket.on('connect', function(socketId) {
   
   console.log(data[0])
   console.log(data[1].join())
+  console.log(data[2].join())
 
-  startScreen(data[0], data[1].join())
+  startScreen(data[0], data[1].join(), data[2].join())
 
  })
 
