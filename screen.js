@@ -154,7 +154,7 @@ socket.on('connect', function(socketId) {
   // startMessage(data.message)
 
   console.log(Object.keys(data))
-
+console.log(data['message'])
  })
 
 //  socket.on('stopMessage', (data) => {
