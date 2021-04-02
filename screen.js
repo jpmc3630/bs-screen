@@ -30,7 +30,12 @@ function startScreen(message, color, colorOutline) {
   
   state.running_pids.forEach(element => {
     kill(element)
+    
   });
+
+  if (state.running_pids.length > 0) {
+    state.running_pids.pop()
+  }
 
   // pkill -9 text-scroller
   setTimeout(() => {
