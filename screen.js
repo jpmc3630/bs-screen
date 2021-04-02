@@ -138,11 +138,11 @@ socket.on('connect', function(socketId) {
 
 
 
- socket.on('startMessage', ({ message }) => {
+ socket.on('startMessage', (data) => {
   console.log('start the message')
-  console.log(message)
+  console.log(data.message)
   // console.log(color)
-  
+
   // console.log(JSON.stringify(data))
   // console.log(data.message)
   // stopMessage()
