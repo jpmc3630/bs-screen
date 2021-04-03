@@ -29,16 +29,24 @@ const socket = io("wss://bs-pager.herokuapp.com",{
 let state = {
   running_pids: []
 }
-
+var child_process = require('child_process');
 
 function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
   console.log(socket.id)
   log.warn(socket.id);
   
+    
+    // child_process.execFile('closeme.sh', [runner.pid], function(error, stdout, stderr){
+  child_process.execFile('closeme.sh', [], function(error, stdout, stderr){
+    console.log(stdout);
+  });
+
   state.running_pids.forEach(element => {
     kill(element)
     
   });
+
+  
 
   if (state.running_pids.length > 0) {
     state.running_pids.pop()
