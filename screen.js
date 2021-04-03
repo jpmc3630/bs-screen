@@ -36,21 +36,21 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
   log.warn(socket.id);
   
     
-    // child_process.execFile('closeme.sh', [runner.pid], function(error, stdout, stderr){
-  child_process.execFile('closeme.sh', [], function(error, stdout, stderr){
-    console.log(stdout);
-  });
+  //   // child_process.execFile('closeme.sh', [runner.pid], function(error, stdout, stderr){
+  // child_process.execFile('closeme.sh', [], function(error, stdout, stderr){
+  //   console.log(stdout);
+  // });
 
-  state.running_pids.forEach(element => {
-    kill(element)
+  // state.running_pids.forEach(element => {
+  //   kill(element)
     
-  });
+  // });
 
   
 
-  if (state.running_pids.length > 0) {
-    state.running_pids.pop()
-  }
+  // if (state.running_pids.length > 0) {
+  //   state.running_pids.pop()
+  // }
 
   // pkill -9 text-scroller
   setTimeout(() => {
