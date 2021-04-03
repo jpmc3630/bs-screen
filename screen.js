@@ -1,132 +1,139 @@
-// required for the kill process
-var psTree = require('ps-tree');
+
+const opts = {
+  errorEventName:'error',
+      logDirectory:'logs',
+      fileNamePattern:'roll-<DATE>.log',
+      dateFormat:'YYYY.MM.DD'
+};
+
+const log = require('simple-node-logger').createRollingFileLogger( opts );
+
+
 var io = require('socket.io-client');
-
-const socket = io("wss://bs-pager.herokuapp.com")
-// const socket = io("http://localhost:3001")
-
-let state = {
-  // currentRoom: '',
-  // roomStatus: ''
-  bigString: `sudo ../text-scroller -f ../../fonts/nethack16.bdf --led-chain=8  --led-rows=16 --led-cols=8 --led-multiplexing=18 --led-parallel=2 --led-slowdown-gpio=5 --led-brightness=100 --led-multiplexing=18 --led-pixel-mapper=Flipper -s.5 -C0,20,255 -t-2 lalalaalalalalalalalalalala `
-}
-
-
-
-
-// var options = {shell:true};  
-// streamingTask = spawn('sleep 20',args,options);
+const quote = require('shell-quote').quote;
 
 var kill = require('tree-kill');
+
+// const socket = io("http://localhost:3001")
+const socket = io("wss://bs-pager.herokuapp.com",{
+  transports: ["websocket"],
+  // forceNew: false,
+  reconnection: true,
+  reconnectionDelay: 3000,
+  reconnectionDelayMax: 5000,
+  reconnectionAttempts: Infinity,
+  transports:["polling", "websocket"]
+});
+
+
+let state = {
+  running_pids: []
+}
 var child_process = require('child_process');
-// var spawn = require('child_process').spawn;
-// var execF = 
-//  child
 
-function startMessage (message) {
+function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
+  console.log(socket.id)
+  log.warn(socket.id);
+  
+    
+    // child_process.execFile('closeme.sh', [runner.pid], function(error, stdout, stderr){
+  child_process.execFile('closeme.sh', [], function(error, stdout, stderr){
+    console.log(stdout);
+  });
+
+  state.running_pids.forEach(element => {
+    kill(element)
+    
+  });
+
   
 
-  
+  if (state.running_pids.length > 0) {
+    state.running_pids.pop()
+  }
 
-  //  = spawn('seq', '', {detached: true});
+  // pkill -9 text-scroller
+  setTimeout(() => {
+    
 
-  var exec = require('child_process').exec;
-  let runner = exec(state.bigString, function(error, stdout, stderr) {
-     console.log('stdout: ' + stdout)
-     // console.log('stderr: ' + stderr);
-     if (error !== null) {
-         console.log('exec error: ' + error)
-     }
- })
-//  runner_pid = runner.pid
-
-
-//    let runner = exec(state.bigString, function(error, stdout, stderr) {
-//       console.log('stdout: ' + stdout)
-//       // console.log('stderr: ' + stderr);
-//       if (error !== null) {
-//           console.log('exec error: ' + error)
-//       }
-//   })
-  // runner_pid = runner.pid
-
-  setTimeout(function() {
-
-
-    // doesn't work ... tried two ways in script 
-    // sudo pkill text-scroller
-    // and 
-    // kill by pid 
-
-  // child_process.execFile('closeme.sh', [runner.pid], function(error, stdout, stderr){
-  //   console.log(stdout);
-  // });
+    var cmdArgs = [
+      '../text-scroller',
+      '-f../../fonts/nethack16.bdf', 
+      '--led-chain=8', 
+      '--led-rows=16', 
+      '--led-cols=8', 
+      '--led-multiplexing=18', 
+      '--led-parallel=2', 
+      '--led-slowdown-gpio=5', 
+      '--led-brightness=100', 
+      '--led-pixel-mapper=Flipper', 
+      '-s' + speed, 
+      '-C' + color, 
+      '-O' + colorOutline, 
+      '-B' + bgColor, 
+      '-t' + spacing, 
+      message
+    ];
 
 
+    const sanitizedCmd = quote(cmdArgs);
+    
+    var exec = require('child_process').exec
+    let runner = exec(sanitizedCmd, function(error, stdout, stderr) {
+      console.log('stdout: ' + stdout)
+      // console.log('stderr: ' + stderr);
+      if (error !== null) {
+          console.log('exec error: ' + error)
+      }
+  })
+  state.running_pids.push(runner.pid)
+  console.log(state.running_pids)
+  log.warn(state.running_pids);
 
-// this worked on my mac ( i think when i tried it with a dummy 'seq 1000000' or something
-// but doesnt seem to work on raspberry pi with this text scroller shit
-    // // killing process
-  //   var kill = function (pid, signal, callback) {
-  //     signal   = signal || 'SIGKILL';
-  //     callback = callback || function () {}
-  //     var killTree = true;
-  //     if(killTree) {
-  //         psTree(pid, function (err, children) {
-  //             [pid].concat(
-  //                 children.map(function (p) {
-  //                     return p.PID;
-  //                 })
-  //             ).forEach(function (tpid) {
-  //                 try { process.kill(tpid, signal) }
-  //                 catch (ex) { }
-  //             });
-  //             callback();
-  //         });
-  //     } else {
-  //         try { process.kill(pid, signal) }
-  //         catch (ex) { }
-  //         callback()
-  //     }
-  // };
-  // console.log(runner.pid)
-  // kill(runner.pid);
 
-  
-  // also try thi tree-kill package but throwing EPERM error? I think this something to do with permissions maybe
-    kill(runner.pid);
-  }, 7000);
-
+  }, 3000);
 }
 
 
-// 
 
-function stopMessage(runner) {
-  
+// socket.io.on("reconnect", () => {
+//   console.log('reconnected')
+//   // log.warn('reconnected');
+// });
 
-
-}
-
+// socket.on("connect_error", () => {
+//   // log.warn('connection error ... trying to reconnect ...');
+//   console.log('connection error ... trying to reconnect....')
+//   socket.connect();
+// });
 
 socket.on('connect', function(socketId) {
   
+  log.warn('connected to server');
   console.log('connected to server')
   socket.emit('screenConnect', 'create');
-  startMessage('inittt')
+  startScreen('init patch', '180,50,80', '70,100,160', '0,0,0', '0.3','-1')
 
 
 
- socket.on('startMessage', (data) => {
-  console.log('start the message')
-  console.log(JSON.stringify(data))
-  // stopMessage()
-  startMessage(data.message)
+ socket.on('startMessage', function(data) {
+  log.info(data[0]);
+  console.log(data[0])
+  console.log(data[1].join())
+  console.log(data[2].join())
+  console.log(data[3].join())
+
+  startScreen(data[0], data[1].join(), data[2].join(), data[3].join(),data[4], data[5])
+
  })
 
-//  socket.on('stopMessage', (data) => {
-//   console.log('stop the message')
-//    stopMessage()
+ //heartbeat response
+//  socket.on('ping', function() {
+//    console.log('got ping, sending pong...')
+//   io.sockets.emit('pong');
 //  })
+
+
+
 
 })
