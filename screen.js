@@ -129,6 +129,17 @@ socket.on('connect', function(socketId) {
 
  })
 
+ socket.on('hardboot', function(data) {
+    var exec = require('child_process').exec
+    let runner = exec('reboot', function(error, stdout, stderr) {
+      console.log('stdout: ' + stdout)
+      // console.log('stderr: ' + stderr);
+      if (error !== null) {
+          console.log('exec error: ' + error)
+      }
+    })
+ })
+
  //heartbeat response
 //  socket.on('ping', function() {
 //    console.log('got ping, sending pong...')
