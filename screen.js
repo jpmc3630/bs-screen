@@ -16,7 +16,7 @@ var kill = require('tree-kill');
 
 // const socket = io("http://localhost:3001")
 const socket = io("wss://bs-pager.herokuapp.com",{
-  transports: ["websocket"],
+  transports:["polling", "websocket"],
   // forceNew: false,
   reconnection: true,
   reconnectionDelay: 3000,
@@ -36,21 +36,21 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
   log.warn(socket.id);
   
     
-  //   // child_process.execFile('closeme.sh', [runner.pid], function(error, stdout, stderr){
-  // child_process.execFile('closeme.sh', [], function(error, stdout, stderr){
-  //   console.log(stdout);
-  // });
+    // try close all text-scrollers with script!
+  child_process.execFile('closeme.sh', [], function(error, stdout, stderr){
+    console.log(stdout);
+  });
 
-  // state.running_pids.forEach(element => {
-  //   kill(element)
+  state.running_pids.forEach(element => {
+    kill(element)
     
-  // });
+  });
 
   
 
-  // if (state.running_pids.length > 0) {
-  //   state.running_pids.pop()
-  // }
+  if (state.running_pids.length > 0) {
+    state.running_pids.pop()
+  }
 
   // pkill -9 text-scroller
   setTimeout(() => {
@@ -107,12 +107,14 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
 //   socket.connect();
 // });
 
+startScreen('bs pager', '180,50,80', '70,100,160', '0,0,0', '0.3','-1')
+
 socket.on('connect', function(socketId) {
   
   log.warn('connected to server');
   console.log('connected to server')
   socket.emit('screenConnect', 'create');
-  startScreen('init patch', '180,50,80', '70,100,160', '0,0,0', '0.3','-1')
+  // startScreen('init patch', '180,50,80', '70,100,160', '0,0,0', '0.3','-1')
 
 
 
