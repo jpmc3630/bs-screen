@@ -27,15 +27,12 @@ const socket = io("wss://bs-pager.herokuapp.com",{
 
 
 let state = {
-  running_pids: [],
-  busy: false
+  running_pids: []
 }
 var child_process = require('child_process');
 
-
-
 function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
-  state.busy = true
+  console.log(socket.id)
   log.warn(socket.id);
   
     
@@ -90,10 +87,9 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
       }
   })
   state.running_pids.push(runner.pid)
-  // console.log(state.running_pids)
+  console.log(state.running_pids)
   log.warn(state.running_pids);
 
-  state.busy = false
 
   }, 3000);
 }
@@ -124,14 +120,13 @@ socket.on('connect', function(socketId) {
 
  socket.on('startMessage', function(data) {
   log.info(data[0]);
-  // console.log(data[0])
-  // console.log(data[1].join())
-  // console.log(data[2].join())
-  // console.log(data[3].join())
+  console.log(data[0])
+  console.log(data[1].join())
+  console.log(data[2].join())
+  console.log(data[3].join())
 
-  if (state.busy == false) {
-    startScreen(data[0], data[1].join(), data[2].join(), data[3].join(),data[4], data[5])
-  }
+  startScreen(data[0], data[1].join(), data[2].join(), data[3].join(),data[4], data[5])
+
  })
 
  socket.on('hardboot', function(data) {
