@@ -107,7 +107,7 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
 //   socket.connect();
 // });
 
-startScreen('bs pager', '180,50,80', '70,100,160', '0,0,0', '0.3','-1')
+startScreen('PERCEPTION', '180,50,80', '70,100,160', '0,0,0', '0.3','-1')
 
 socket.on('connect', function(socketId) {
   
