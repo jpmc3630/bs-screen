@@ -123,14 +123,16 @@ socket.on('connect', function(socketId) {
 
 
  socket.on('startMessage', function(data) {
-  log.info(data[0]);
   // console.log(data[0])
   // console.log(data[1].join())
   // console.log(data[2].join())
   // console.log(data[3].join())
 
   if (state.busy == false) {
+    log.info(data[0]);
     startScreen(data[0], data[1].join(), data[2].join(), data[3].join(),data[4], data[5])
+  } else {
+    log.info('NOT POSTED COS BUSY: ' + data[0]);
   }
  })
 
