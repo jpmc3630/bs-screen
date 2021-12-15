@@ -72,7 +72,7 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
       '-O' + colorOutline, 
       '-B' + bgColor, 
       '-t' + spacing, 
-      message
+      '   ' + message // just a little spacing to make text start off screen
     ];
 
 
