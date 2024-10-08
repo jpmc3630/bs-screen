@@ -111,7 +111,7 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
 //   socket.connect();
 // });
 
-startScreen('han bao bao', '180,50,80', '70,100,160', '0,0,0', '0.3','-1')
+startScreen('...........', '180,50,80', '70,100,160', '0,0,0', '0.3','-1')
 
 socket.on('connect', function(socketId) {
   
