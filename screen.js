@@ -59,38 +59,38 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
   setTimeout(() => {
     
 
-    var cmdArgs = [
-      '../text-scroller',
-      '-f../../fonts/nethack16.bdf', 
-      '--led-chain=8', 
-      '--led-rows=16', 
-      '--led-cols=8', 
-      '--led-multiplexing=18', 
-      '--led-parallel=2', 
-      '--led-slowdown-gpio=5', 
-      '--led-brightness=100', 
-      '--led-pixel-mapper=Flipper', 
-      '-s' + speed, 
-      '-C' + color, 
-      '-O' + colorOutline, 
-      '-B' + bgColor, 
-      '-t' + spacing, 
-      '   ' + message // just a little spacing to make text start off screen
-    ];
-
-
     // var cmdArgs = [
-    //   '../led-image-viewer',
-    //   'trippy232.gif',
-    //   '--led-chain=8',
-    //   '--led-rows=16',
-    //   '--led-cols=8',
-    //   '--led-multiplexing=18',
-    //   '--led-parallel=2',
-    //   '--led-slowdown-gpio=5',
-    //   '--led-brightness=100',
-    //   '--led-pixel-mapper=Flipper',
+    //   '../text-scroller',
+    //   '-f../../fonts/nethack16.bdf', 
+    //   '--led-chain=8', 
+    //   '--led-rows=16', 
+    //   '--led-cols=8', 
+    //   '--led-multiplexing=18', 
+    //   '--led-parallel=2', 
+    //   '--led-slowdown-gpio=5', 
+    //   '--led-brightness=100', 
+    //   '--led-pixel-mapper=Flipper', 
+    //   '-s' + speed, 
+    //   '-C' + color, 
+    //   '-O' + colorOutline, 
+    //   '-B' + bgColor, 
+    //   '-t' + spacing, 
+    //   '   ' + message // just a little spacing to make text start off screen
     // ];
+
+
+    var cmdArgs = [
+      '../led-image-viewer',
+      'trippy232.gif',
+      '--led-chain=8',
+      '--led-rows=16',
+      '--led-cols=8',
+      '--led-multiplexing=18',
+      '--led-parallel=2',
+      '--led-slowdown-gpio=5',
+      '--led-brightness=100',
+      '--led-pixel-mapper=Flipper',
+    ];
 
     // ./led-image-viewer trippy21.gif
     // scp /Users/james/Downloads/asd.gif root@raspberrypi.local:/home/pi/code/rpi-rgb-led-matrix/utils/asd.gif
@@ -139,8 +139,7 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
 
 
 
-
-// startScreen('...........', '180,50,80', '70,100,160', '0,0,0', '0.3','-1')
+startScreen('...........', '180,50,80', '70,100,160', '0,0,0', '0.3','-1')
 
 socket.on('connect', function(socketId) {
   
