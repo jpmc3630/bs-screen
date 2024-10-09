@@ -34,7 +34,7 @@ var child_process = require('child_process');
 
 
 
-function startScreen(message, color, colorOutline, bgColor, speed, spacing, textureFile = null) {
+function startScreen(message, color, colorOutline, bgColor, speed, spacing, textureFile = null, frameDelayMs = -1, brightness = 100) {
   state.busy = true
   log.warn(socket.id);
   
@@ -82,6 +82,7 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing, text
   } else {
     cmdArgs = [
       '../led-image-viewer',
+      '-D ' + frameDelayMs,
       '../gifs/' + textureFile + ".gif",
       // '../trippy231.gif', // gif
       '--led-chain=8',
@@ -92,6 +93,7 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing, text
       '--led-slowdown-gpio=5',
       '--led-brightness=100',
       '--led-pixel-mapper=Flipper',
+      '--led-brightness=' + brightness,
     ];
   }
 
@@ -144,8 +146,10 @@ socket.on('connect', function(socketId) {
   console.log('startMessage')
   console.log(data)
 
-  const isTexture = data.length > 6 && data[6] != null;
-  const textureFile = isTexture ? data[6] : null;
+  const isTexture = data.length > 7 && data[7] != null; // Check if data contains textureFile
+  const textureFile = isTexture ? data[7] : null;
+  const frameDelayMs = isTexture ? data[4] : -1;       // textureSpeed is now in data[4]
+  const brightness = isTexture ? data[6] : 100;        // brightness is now in data[6]
 
   // console.log(data[0])
   // console.log(data[1].join())
@@ -158,7 +162,7 @@ socket.on('connect', function(socketId) {
     } else {
       log.info(`gif: ${textureFile}`);
     }
-    startScreen(data[0], data[1].join(), data[2].join(), data[3].join(),data[4], data[5], textureFile)
+    startScreen(data[0], data[1].join(), data[2].join(), data[3].join(), data[4], data[5], textureFile, frameDelayMs, brightness);
   } else {
     if (!textureFile) {
       log.info(`NOT POSTED COS BUSY: ${data[0]}`);
