@@ -65,6 +65,7 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing, text
     let cmdArgs;
 
     console.log('brightness up here: zxc' + brightness);
+    console.log('frameDelayMs up here: zxc' + frameDelayMs);
     if (!textureFile) {
     cmdArgs = [
       '../text-scroller',
