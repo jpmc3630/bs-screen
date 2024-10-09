@@ -82,7 +82,7 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing, text
   } else {
     cmdArgs = [
       '../led-image-viewer',
-      '../' + textureFile + ".gif",
+      '../gifs/' + textureFile + ".gif",
       // '../trippy231.gif', // gif
       '--led-chain=8',
       '--led-rows=16',
