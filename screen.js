@@ -60,7 +60,8 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing, text
     
     let cmdArgs;
 
-    if (!textureFile) {
+    // if (!textureFile) {
+    if (true) {
     cmdArgs = [
       '../text-scroller',
       '-f../../fonts/nethack16.bdf', 
