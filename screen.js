@@ -34,7 +34,7 @@ var child_process = require('child_process');
 
 
 
-function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
+function startScreen(message, color, colorOutline, bgColor, speed, spacing, textureFile = null) {
   state.busy = true
   log.warn(socket.id);
   
@@ -58,8 +58,10 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
   // pkill -9 text-scroller
   setTimeout(() => {
     
+    let cmdArgs;
 
-    var cmdArgs = [
+    if (!textureFile) {
+    cmdArgs = [
       '../text-scroller',
       '-f../../fonts/nethack16.bdf', 
       '--led-chain=8', 
@@ -77,33 +79,21 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
       '-t' + spacing, 
       '   ' + message // just a little spacing to make text start off screen
     ];
-
-
-    // var cmdArgs = [
-    //   '../led-image-viewer',
-    //   '../trippy231.gif',
-    //   '--led-chain=8',
-    //   '--led-rows=16',
-    //   '--led-cols=8',
-    //   '--led-multiplexing=18',
-    //   '--led-parallel=2',
-    //   '--led-slowdown-gpio=5',
-    //   '--led-brightness=100',
-    //   '--led-pixel-mapper=Flipper',
-    // ];
-
-    // ./led-image-viewer trippy21.gif
-    // scp /Users/james/Downloads/asd.gif root@raspberrypi.local:/home/pi/code/rpi-rgb-led-matrix/utils/asd.gif
-
-    // ./pixel-mover --led-chain=8 --led-rows=16 --led-cols=8 --led-multiplexing=18 --led-parallel=2 --led-slowdown-gpio=5 --led-brightness=100 --led-pixel-mapper=Flipper
-
-    // sudo ./led-image-viewer cmyk.gif --led-chain=8 --led-rows=16 --led-cols=8 --led-multiplexing=18 --led-parallel=2 --led-slowdown-gpio=5 --led-brightness=100 --led-pixel-mapper=Flipper
-
-
-    // cd /home/pi/code/rpi-rgb-led-matrix/utils
-    // sudo ./led-image-viewer trippy232.gif --led-chain=8 --led-rows=16 --led-cols=8 --led-multiplexing=18 --led-parallel=2 --led-slowdown-gpio=5 --led-brightness=10 --led-pixel-mapper=Flipper
-    
-    // 1148 x 160 at 72 dpi
+  } else {
+    cmdArgs = [
+      '../led-image-viewer',
+      '../' + textureFile + ".gif",
+      // '../trippy231.gif', // gif
+      '--led-chain=8',
+      '--led-rows=16',
+      '--led-cols=8',
+      '--led-multiplexing=18',
+      '--led-parallel=2',
+      '--led-slowdown-gpio=5',
+      '--led-brightness=100',
+      '--led-pixel-mapper=Flipper',
+    ];
+  }
 
     const sanitizedCmd = quote(cmdArgs);
     
@@ -159,26 +149,11 @@ socket.on('connect', function(socketId) {
   // console.log(data[3].join())
 
   if (state.busy == false) {
+    log.info(`Starting screen with message: ${data[0]} or texture: ${textureFile}`);
     log.info(data[0]);
-    startScreen(data[0], data[1].join(), data[2].join(), data[3].join(),data[4], data[5])
+    startScreen(data[0], data[1].join(), data[2].join(), data[3].join(),data[4], data[5], textureFile)
   } else {
-    log.info('NOT POSTED COS BUSY: ' + data[0]);
-  }
- })
-
- socket.on('startTexture', function(data) {
-  console.log('startTexture')
-  console.log(data)
-  // console.log(data[0])
-  // console.log(data[1].join())
-  // console.log(data[2].join())
-  // console.log(data[3].join())
-
-  if (state.busy == false) {
-    log.info(data[0]);
-    startScreen(data[0], data[1].join(), data[2].join(), data[3].join(),data[4], data[5])
-  } else {
-    log.info('NOT POSTED COS BUSY: ' + data[0]);
+    log.info(`NOT POSTED COS BUSY: ${data[0]} or texture: ${textureFile}`);
   }
  })
 
