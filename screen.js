@@ -59,24 +59,24 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
   setTimeout(() => {
     
 
-    var cmdArgs = [
-      '../text-scroller',
-      '-f../../fonts/nethack16.bdf', 
-      '--led-chain=8', 
-      '--led-rows=16', 
-      '--led-cols=8', 
-      '--led-multiplexing=18', 
-      '--led-parallel=2', 
-      '--led-slowdown-gpio=5', 
-      '--led-brightness=100', 
-      '--led-pixel-mapper=Flipper', 
-      '-s' + speed, 
-      '-C' + color, 
-      '-O' + colorOutline, 
-      '-B' + bgColor, 
-      '-t' + spacing, 
-      '   ' + message // just a little spacing to make text start off screen
-    ];
+    // var cmdArgs = [
+    //   '../text-scroller',
+    //   '-f../../fonts/nethack16.bdf', 
+    //   '--led-chain=8', 
+    //   '--led-rows=16', 
+    //   '--led-cols=8', 
+    //   '--led-multiplexing=18', 
+    //   '--led-parallel=2', 
+    //   '--led-slowdown-gpio=5', 
+    //   '--led-brightness=100', 
+    //   '--led-pixel-mapper=Flipper', 
+    //   '-s' + speed, 
+    //   '-C' + color, 
+    //   '-O' + colorOutline, 
+    //   '-B' + bgColor, 
+    //   '-t' + spacing, 
+    //   '   ' + message // just a little spacing to make text start off screen
+    // ];
 
 
     var cmdArgs = [
