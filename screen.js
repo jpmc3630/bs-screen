@@ -82,20 +82,14 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
     var cmdArgs = [
       '../led-image-viewer',
       'trippy232.gif',
-      '--led-chain=8', 
-      '--led-rows=16', 
-      '--led-cols=8', 
-      '--led-multiplexing=18', 
-      '--led-parallel=2', 
-      '--led-slowdown-gpio=5', 
-      '--led-brightness=100', 
-      '--led-pixel-mapper=Flipper', 
-      // '-s' + speed, 
-      // '-C' + color, 
-      // '-O' + colorOutline, 
-      // '-B' + bgColor, 
-      // '-t' + spacing, 
-      // '   ' + message // just a little spacing to make text start off screen
+      '--led-chain=8',
+      '--led-rows=16',
+      '--led-cols=8',
+      '--led-multiplexing=18',
+      '--led-parallel=2',
+      '--led-slowdown-gpio=5',
+      '--led-brightness=100',
+      '--led-pixel-mapper=Flipper',
     ];
 
     // ./led-image-viewer trippy21.gif
