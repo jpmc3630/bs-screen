@@ -155,6 +155,7 @@ socket.on('connect', function(socketId) {
   const frameDelayMs = isTexture ? data[4] : -1;       // textureSpeed is now in data[4]
   const brightness = isTexture ? data[6] : 100;        // brightness is now in data[6]
 
+  console.log('brightness zzz: ' + brightness);
   // console.log(data[0])
   // console.log(data[1].join())
   // console.log(data[2].join())
