@@ -81,7 +81,7 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
 
     var cmdArgs = [
       '../led-image-viewer',
-      '../trippy232.gif',
+      '../trippy231.gif',
       '--led-chain=8',
       '--led-rows=16',
       '--led-cols=8',
