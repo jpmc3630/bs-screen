@@ -60,8 +60,7 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing, text
     
     let cmdArgs;
 
-    // if (!textureFile) {
-    if (true) {
+    if (!textureFile) {
     cmdArgs = [
       '../text-scroller',
       '-f../../fonts/nethack16.bdf', 
@@ -144,17 +143,28 @@ socket.on('connect', function(socketId) {
  socket.on('startMessage', function(data) {
   console.log('startMessage')
   console.log(data)
+
+  const isTexture = data.length > 6 && data[6] != null;
+  const textureFile = isTexture ? data[6] : null;
+
   // console.log(data[0])
   // console.log(data[1].join())
   // console.log(data[2].join())
   // console.log(data[3].join())
 
   if (state.busy == false) {
-    log.info(`Starting screen with message: ${data[0]} or texture: ${textureFile}`);
-    log.info(data[0]);
+    if (!textureFile) {
+      log.info(data[0]);
+    } else {
+      log.info(`gif: ${textureFile}`);
+    }
     startScreen(data[0], data[1].join(), data[2].join(), data[3].join(),data[4], data[5], textureFile)
   } else {
-    log.info(`NOT POSTED COS BUSY: ${data[0]} or texture: ${textureFile}`);
+    if (!textureFile) {
+      log.info(`NOT POSTED COS BUSY: ${data[0]}`);
+    } else {
+      log.info(`NOT POSTED COS BUSY: gif: ${textureFile}`);
+    }
   }
  })
 
