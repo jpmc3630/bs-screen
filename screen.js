@@ -79,6 +79,38 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
     ];
 
 
+    var cmdArgs = [
+      '../led-image-viewer',
+      'trippy232.gif',
+      '--led-chain=8', 
+      '--led-rows=16', 
+      '--led-cols=8', 
+      '--led-multiplexing=18', 
+      '--led-parallel=2', 
+      '--led-slowdown-gpio=5', 
+      '--led-brightness=100', 
+      '--led-pixel-mapper=Flipper', 
+      // '-s' + speed, 
+      // '-C' + color, 
+      // '-O' + colorOutline, 
+      // '-B' + bgColor, 
+      // '-t' + spacing, 
+      // '   ' + message // just a little spacing to make text start off screen
+    ];
+
+    // ./led-image-viewer trippy21.gif
+    // scp /Users/james/Downloads/asd.gif root@raspberrypi.local:/home/pi/code/rpi-rgb-led-matrix/utils/asd.gif
+
+    // ./pixel-mover --led-chain=8 --led-rows=16 --led-cols=8 --led-multiplexing=18 --led-parallel=2 --led-slowdown-gpio=5 --led-brightness=100 --led-pixel-mapper=Flipper
+
+    // sudo ./led-image-viewer cmyk.gif --led-chain=8 --led-rows=16 --led-cols=8 --led-multiplexing=18 --led-parallel=2 --led-slowdown-gpio=5 --led-brightness=100 --led-pixel-mapper=Flipper
+
+
+    // cd /home/pi/code/rpi-rgb-led-matrix/utils
+    // sudo ./led-image-viewer trippy232.gif --led-chain=8 --led-rows=16 --led-cols=8 --led-multiplexing=18 --led-parallel=2 --led-slowdown-gpio=5 --led-brightness=10 --led-pixel-mapper=Flipper
+    
+    // 1148 x 160 at 72 dpi
+
     const sanitizedCmd = quote(cmdArgs);
     
     var exec = require('child_process').exec
