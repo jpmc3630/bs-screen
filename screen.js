@@ -59,38 +59,38 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing) {
   setTimeout(() => {
     
 
-    // var cmdArgs = [
-    //   '../text-scroller',
-    //   '-f../../fonts/nethack16.bdf', 
-    //   '--led-chain=8', 
-    //   '--led-rows=16', 
-    //   '--led-cols=8', 
-    //   '--led-multiplexing=18', 
-    //   '--led-parallel=2', 
-    //   '--led-slowdown-gpio=5', 
-    //   '--led-brightness=100', 
-    //   '--led-pixel-mapper=Flipper', 
-    //   '-s' + speed, 
-    //   '-C' + color, 
-    //   '-O' + colorOutline, 
-    //   '-B' + bgColor, 
-    //   '-t' + spacing, 
-    //   '   ' + message // just a little spacing to make text start off screen
-    // ];
-
-
     var cmdArgs = [
-      '../led-image-viewer',
-      '../trippy231.gif',
-      '--led-chain=8',
-      '--led-rows=16',
-      '--led-cols=8',
-      '--led-multiplexing=18',
-      '--led-parallel=2',
-      '--led-slowdown-gpio=5',
-      '--led-brightness=100',
-      '--led-pixel-mapper=Flipper',
+      '../text-scroller',
+      '-f../../fonts/nethack16.bdf', 
+      '--led-chain=8', 
+      '--led-rows=16', 
+      '--led-cols=8', 
+      '--led-multiplexing=18', 
+      '--led-parallel=2', 
+      '--led-slowdown-gpio=5', 
+      '--led-brightness=100', 
+      '--led-pixel-mapper=Flipper', 
+      '-s' + speed, 
+      '-C' + color, 
+      '-O' + colorOutline, 
+      '-B' + bgColor, 
+      '-t' + spacing, 
+      '   ' + message // just a little spacing to make text start off screen
     ];
+
+
+    // var cmdArgs = [
+    //   '../led-image-viewer',
+    //   '../trippy231.gif',
+    //   '--led-chain=8',
+    //   '--led-rows=16',
+    //   '--led-cols=8',
+    //   '--led-multiplexing=18',
+    //   '--led-parallel=2',
+    //   '--led-slowdown-gpio=5',
+    //   '--led-brightness=100',
+    //   '--led-pixel-mapper=Flipper',
+    // ];
 
     // ./led-image-viewer trippy21.gif
     // scp /Users/james/Downloads/asd.gif root@raspberrypi.local:/home/pi/code/rpi-rgb-led-matrix/utils/asd.gif
@@ -151,6 +151,24 @@ socket.on('connect', function(socketId) {
 
 
  socket.on('startMessage', function(data) {
+  console.log('startMessage')
+  console.log(data)
+  // console.log(data[0])
+  // console.log(data[1].join())
+  // console.log(data[2].join())
+  // console.log(data[3].join())
+
+  if (state.busy == false) {
+    log.info(data[0]);
+    startScreen(data[0], data[1].join(), data[2].join(), data[3].join(),data[4], data[5])
+  } else {
+    log.info('NOT POSTED COS BUSY: ' + data[0]);
+  }
+ })
+
+ socket.on('startTexture', function(data) {
+  console.log('startTexture')
+  console.log(data)
   // console.log(data[0])
   // console.log(data[1].join())
   // console.log(data[2].join())
