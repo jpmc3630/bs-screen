@@ -38,10 +38,10 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing, text
   state.busy = true
   log.warn(socket.id);
   
-    // Ensure brightness is a valid number before using it in the command
-    if (typeof brightness !== 'number' || isNaN(brightness)) {
-      brightness = 100; // Default brightness value
-    }
+    // // Ensure brightness is a valid number before using it in the command
+    // if (typeof brightness !== 'number' || isNaN(brightness)) {
+    //   brightness = 100; // Default brightness value
+    // }
     
     // try close all text-scrollers with script!
   child_process.execFile('closeme.sh', [], function(error, stdout, stderr){
