@@ -38,6 +38,10 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing, text
   state.busy = true
   log.warn(socket.id);
   
+    // Ensure brightness is a valid number before using it in the command
+    if (typeof brightness !== 'number' || isNaN(brightness)) {
+      brightness = 100; // Default brightness value
+    }
     
     // try close all text-scrollers with script!
   child_process.execFile('closeme.sh', [], function(error, stdout, stderr){
@@ -91,7 +95,7 @@ function startScreen(message, color, colorOutline, bgColor, speed, spacing, text
       '--led-multiplexing=18',
       '--led-parallel=2',
       '--led-slowdown-gpio=5',
-      '--led-brightness=100',
+      // '--led-brightness=100',
       '--led-pixel-mapper=Flipper',
       '--led-brightness=' + brightness,
     ];
